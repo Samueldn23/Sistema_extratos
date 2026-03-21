@@ -34,9 +34,9 @@ Thumbs.db
 .DS_Store
 
 # Banco de dados
-*.db
-*.sqlite
-*.sqlite3
+#*.db
+#*.sqlite
+#*.sqlite3
 
 # Arquivo de testes (se gerado dinamicamente)
 testes/temp/
