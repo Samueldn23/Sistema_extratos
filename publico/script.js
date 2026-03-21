@@ -1247,15 +1247,18 @@ function updateThemeButton() {
 function updateTableAuthStatus() {
     const table = document.querySelector('.transactions-table');
     const dataDropdown = document.getElementById('data-dropdown');
+    const btnAddModal = document.getElementById('btn-add-modal');
 
     if (estaoAutenticado()) {
         // Usuário autenticado - mostrar elementos protegidos
         if (table) table.classList.remove('not-authenticated');
         if (dataDropdown) dataDropdown.classList.remove('not-authenticated');
+        if (btnAddModal) btnAddModal.classList.remove('not-authenticated');
     } else {
         // Usuário não autenticado - ocultar elementos protegidos
         if (table) table.classList.add('not-authenticated');
         if (dataDropdown) dataDropdown.classList.add('not-authenticated');
+        if (btnAddModal) btnAddModal.classList.add('not-authenticated');
     }
 }
 
