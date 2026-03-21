@@ -1,0 +1,60 @@
+<!-- Arquivo de teste para verificar se os scripts estão funcionando -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificação de Scripts</title>
+</head>
+<body>
+    <h1>Verificação de Carregamento</h1>
+    <div id="status"></div>
+
+    <script>
+        const status = document.getElementById('status');
+
+        // Simulação do que deveria acontecer
+        const checks = {
+            'script.js carregado': typeof apiPost !== 'undefined',
+            'auth.js carregado': typeof estaoAutenticado !== 'undefined',
+            'Funções em window': {
+                'window.apiPost': typeof window.apiPost === 'function',
+                'window.apiPut': typeof window.apiPut === 'function',
+                'window.apiDelete': typeof window.apiDelete === 'function',
+                'window.apiPatch': typeof window.apiPatch === 'function',
+            },
+            'Funções de autenticação': {
+                'estaoAutenticado': typeof estaoAutenticado === 'function',
+                'mostrarBotaoLogin': typeof mostrarBotaoLogin === 'function',
+                'mostrarTelaLoginModal': typeof mostrarTelaLoginModal === 'function',
+                'mostrarBotaoLogout': typeof mostrarBotaoLogout === 'function',
+            }
+        };
+
+        let html = '<h2>Status dos Scripts:</h2><ul>';
+
+        function checkStatus(obj, prefix = '') {
+            for (const [key, value] of Object.entries(obj)) {
+                const fullKey = prefix ? `${prefix}.${key}` : key;
+                if (typeof value === 'object' && value !== null) {
+                    html += checkStatus(value, fullKey);
+                } else {
+                    const status = value ? '✅' : '❌';
+                    html += `<li>${status} ${fullKey}</li>`;
+                }
+            }
+            return '';
+        }
+
+        checkStatus(checks);
+        html += '</ul>';
+
+        status.innerHTML = html;
+
+        // Log no console
+        console.log('Verificação de Scripts:', checks);
+        console.log('window.apiPost:', window.apiPost);
+        console.log('window.apiPut:', window.apiPut);
+        console.log('window.apiDelete:', window.apiDelete);
+        console.log('window.apiPatch:', window.apiPatch);
+    </script>
+</body>
+</html>

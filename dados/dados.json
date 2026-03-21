@@ -1,0 +1,42 @@
+[
+  {
+    "id": "trans_001",
+    "DATA": "2026-03-01T10:30:00",
+    "DESCRIÇÃO": "Salário",
+    "VALOR": 3500.00,
+    "CATEGORIA": "trabalho",
+    "pago": true
+  },
+  {
+    "id": "trans_002",
+    "DATA": "2026-03-05T14:15:00",
+    "DESCRIÇÃO": "Supermercado",
+    "VALOR": -150.00,
+    "CATEGORIA": "alimentacao",
+    "pago": true
+  },
+  {
+    "id": "trans_003",
+    "DATA": "2026-03-10T08:45:00",
+    "DESCRIÇÃO": "Uber",
+    "VALOR": -45.00,
+    "CATEGORIA": "transporte",
+    "pago": true
+  },
+  {
+    "id": "trans_004",
+    "DATA": "2026-03-15T19:20:00",
+    "DESCRIÇÃO": "Cinema",
+    "VALOR": -60.00,
+    "CATEGORIA": "lazer",
+    "pago": false
+  },
+  {
+    "id": "trans_005",
+    "DATA": "2026-03-20T11:00:00",
+    "DESCRIÇÃO": "Farmácia",
+    "VALOR": -85.50,
+    "CATEGORIA": "saude",
+    "pago": true
+  }
+]

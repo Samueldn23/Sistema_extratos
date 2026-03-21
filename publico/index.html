@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Sistema de Extratos</title>
+    <link rel="stylesheet" href="style.css?v=4.0">
+    <script src="https://sql.js.org/dist/sql-wasm.js" type="application/javascript"></script>
+</head>
+<body>
+    <!-- Container de Autenticação -->
+    <div id="auth-container"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-brand">
+                <span class="brand-icon">💰</span>
+                <div>
+                    <h1>Extratos</h1>
+                    <span class="subtitle">Controle financeiro pessoal</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="btn-toggle-theme" title="Alternar tema escuro/claro">🌙</button>
+                <div class="column-filter-inline" id="column-filter-inline">
+                    <button class="btn-icon" id="btn-filter-toggle-inline" title="Mostrar/ocultar elementos">⚙️</button>
+                    <div class="column-filter-popover" id="column-filter-popover" style="display: none;">
+                        <div class="filter-title">Visibilidade</div>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="busca" checked> 🔍 Busca
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="data" checked> 📅 Data
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="data-ref" checked> 📆 Data de Ref.
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="descricao" checked> 📝 Descrição
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="valor" checked> 💲 Valor
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="tipo" checked> 🏷️ Tipo
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" data-column="acao" checked> ⚡ Ações
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Toolbar -->
+            <section class="toolbar">
+                <!-- Navegação de Período -->
+                <div class="toolbar-group toolbar-nav">
+                    <button class="btn-nav" id="prev-month" title="Mês anterior">◀</button>
+                    <div class="period-display" id="period-display" title="Clique para voltar ao mês atual">
+                        <span class="period-month" id="current-month">Março</span>
+                        <span class="period-year" id="current-year">2026</span>
+                    </div>
+                    <button class="btn-nav" id="next-month" title="Próximo mês">▶</button>
+                </div>
+
+                <!-- Ações Rápidas -->
+                <div class="toolbar-group toolbar-actions">
+                    <button class="toolbar-btn btn-primary-action" id="btn-add-modal" title="Nova Transação">
+                        <span>➕</span> <span class="btn-label">Nova</span>
+                    </button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Dados -->
+                    <div class="toolbar-dropdown" id="data-dropdown">
+                        <button class="toolbar-btn" id="btn-data-menu" title="Gerenciar dados">
+                            <span>📂</span> <span class="btn-label">Dados</span>
+                        </button>
+                        <div class="toolbar-dropdown-menu" id="data-dropdown-menu">
+                            <button class="dropdown-item" id="btn-import-json" title="Importar dados do JSON">
+                                <span>⬆️</span> Importar JSON
+                            </button>
+                            <button class="dropdown-item" id="btn-upload-json" title="Upload JSON">
+                                <span>📁</span> Upload JSON
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" id="btn-export-db" title="Exportar banco SQLite">
+                                <span>💾</span> Exportar DB
+                            </button>
+                            <button class="dropdown-item" id="btn-import-db" title="Importar banco SQLite">
+                                <span>📥</span> Importar DB
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item dropdown-item-danger" id="btn-clear-database" title="Apagar todo o banco de dados">
+                                <span>🗑️</span> Limpar Tudo
+                            </button>
+                        </div>
+                    </div>
+                    <input type="file" id="json-file-input" accept=".json" style="display: none;">
+                    <input type="file" id="db-file-input" accept=".db" style="display: none;">
+
+                    <!-- Aparência -->
+                    <div class="toolbar-dropdown" id="appearance-dropdown">
+                        <button class="toolbar-btn" id="btn-appearance-menu" title="Personalizar aparência">
+                            <span>🎨</span> <span class="btn-label">Tema</span>
+                        </button>
+                        <div class="toolbar-dropdown-menu" id="appearance-dropdown-menu">
+                            <div class="dropdown-section-title">Cores</div>
+                            <select class="dropdown-select" id="theme-selector">
+                                <option value="default">🎨 Padrão</option>
+                                <option value="ocean">🌊 Ocean</option>
+                                <option value="forest">🌲 Forest</option>
+                                <option value="sunset">🌅 Sunset</option>
+                                <option value="lavender">💜 Lavender</option>
+                                <option value="mint">🌿 Mint</option>
+                                <option value="rose">🌹 Rose</option>
+                            </select>
+                            <div class="dropdown-section-title">Layout</div>
+                            <select class="dropdown-select" id="layout-selector">
+                                <option value="modern">📐 Moderno</option>
+                                <option value="compact">📦 Compacto</option>
+                                <option value="minimalist">✨ Minimalista</option>
+                                <option value="relaxed">🌊 Relaxado</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Barra de Pesquisa -->
+            <section class="search-section" id="search-section">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="search-input"
+                        class="search-input"
+                        placeholder="Pesquisar por data, descrição ou valor..."
+                        autocomplete="off"
+                    >
+                    <button class="btn-clear-search" id="btn-clear-search" style="display: none;">✕</button>
+                </div>
+            </section>
+
+            <!-- Painel de Filtro (oculto) -->
+            <section class="column-filter-panel" id="column-filter-panel" style="display: none;"></section>
+
+            <!-- Summary Section -->
+            <section class="summary-section">
+                <div class="summary-card anterior">
+                    <div class="summary-icon">📊</div>
+                    <div class="summary-content">
+                        <h3>Saldo Anterior</h3>
+                        <p id="total-anterior">R$ 0,00</p>
+                    </div>
+                </div>
+                <div class="summary-card receita">
+                    <div class="summary-icon">📈</div>
+                    <div class="summary-content">
+                        <h3>Total de Receitas</h3>
+                        <p id="total-receitas">R$ 0,00</p>
+                    </div>
+                </div>
+                <div class="summary-card despesa">
+                    <div class="summary-icon">📉</div>
+                    <div class="summary-content">
+                        <h3>Total de Despesas</h3>
+                        <p id="total-despesas">R$ 0,00</p>
+                    </div>
+                </div>
+                <div class="summary-card saldo">
+                    <div class="summary-icon">💵</div>
+                    <div class="summary-content">
+                        <h3>Saldo Total</h3>
+                        <p id="total-saldo">R$ 0,00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Table Section -->
+            <section class="transactions-section">
+                <div class="section-header">
+                    <h2>📊 Transações</h2>
+                    <span class="transaction-count" id="transaction-count"></span>
+                </div>
+                <div id="table-section" class="table-container">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Data de Ref.</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Tipo</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body"></tbody>
+                    </table>
+                </div>
+                <p id="no-data-message" class="no-data">Carregando dados...</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para Adicionar Transação -->
+    <div id="addTransactionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Nova Transação</h2>
+                <button class="close" id="closeModal" type="button">&times;</button>
+            </div>
+            <form id="transactionForm" class="transaction-form">
+                <div class="form-group">
+                    <label for="transactionDate">📅 Data</label>
+                    <input type="date" id="transactionDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionMonthRef">📆 Mês de Referência</label>
+                    <input type="month" id="transactionMonthRef" title="Deixe em branco para usar o mês da data acima">
+                    <span class="form-hint">Opcional — usa o mês da data se vazio</span>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDesc">📝 Descrição</label>
+                    <input type="text" id="transactionDesc" placeholder="Ex: Salário, Compras..." required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="transactionValue">💲 Valor</label>
+                        <input type="number" id="transactionValue" placeholder="0,00" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionType">🏷️ Tipo</label>
+                        <select id="transactionType" required>
+                            <option value="receita">Receita</option>
+                            <option value="despesa">Despesa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn-submit">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Transação -->
+    <div id="editTransactionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Editar Transação</h2>
+                <button class="close" id="closeEditModal" type="button">&times;</button>
+            </div>
+            <form id="editTransactionForm" class="transaction-form">
+                <div class="form-group">
+                    <label for="editTransactionDate">📅 Data</label>
+                    <input type="date" id="editTransactionDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionMonthRef">📆 Mês de Referência</label>
+                    <input type="month" id="editTransactionMonthRef" title="Deixe em branco para usar o mês da data acima">
+                    <span class="form-hint">Opcional — usa o mês da data se vazio</span>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionDesc">📝 Descrição</label>
+                    <input type="text" id="editTransactionDesc" placeholder="Ex: Salário, Compras..." required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editTransactionValue">💲 Valor</label>
+                        <input type="number" id="editTransactionValue" placeholder="0,00" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTransactionType">🏷️ Tipo</label>
+                        <select id="editTransactionType" required>
+                            <option value="receita">Receita</option>
+                            <option value="despesa">Despesa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="cancelEditBtn">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js?v=4.0"></script>
+    <script src="auth.js?v=1.0"></script>
+</body>
+</html>
