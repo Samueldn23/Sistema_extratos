@@ -110,7 +110,7 @@ Suas transações antigas ficarão lá (vinculadas ao email anterior).
 → Altere em `src/servidor.js` linha 10:
 
 ```javascript
-const PORT = 3001; // Troque de porta
+const PORT = 3000; // Troque de porta
 ```
 
 ---

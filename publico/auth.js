@@ -3,7 +3,7 @@
 // Gerencia login, registro e persistência de tokens
 // ======================================================================
 
-const AUTH_API_URL = 'http://localhost:3001/api/auth';
+const AUTH_API_URL = 'http://localhost:3000/api/auth';
 let authToken = localStorage.getItem('authToken') || null;
 let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 

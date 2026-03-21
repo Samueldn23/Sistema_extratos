@@ -254,7 +254,7 @@ sqlite3 sistema_extratos.db
 
 ```bash
 # Mude a porta no src/servidor.js:
-const PORT = 3001; // ao invés de 3000
+const PORT = 3000;
 ```
 
 ### Erro: "Cannot find module 'bcryptjs'"

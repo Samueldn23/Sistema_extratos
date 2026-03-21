@@ -3,7 +3,7 @@
 // Gerencia transações com requisições HTTP ao servidor Node.js
 // ======================================================================
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://localhost:3000/api';
 
 let allTransactions = [];
 let currentDate = new Date();
