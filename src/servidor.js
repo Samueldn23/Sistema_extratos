@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 });
 
 // Inicializar banco de dados SQLite
-const DB_PATH = path.join(__dirname, '..', 'banco', 'sistema_extratos.db');
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, '..', 'banco', 'sistema_extratos.db');
 const db = new sqlite3.Database(DB_PATH, (err) => {
     if (err) {
         logError('Erro ao conectar ao banco de dados', err);

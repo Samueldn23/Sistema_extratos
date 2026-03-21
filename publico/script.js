@@ -3,7 +3,7 @@
 // Gerencia transações com requisições HTTP ao servidor Node.js
 // ======================================================================
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 
 let allTransactions = [];
 let currentDate = new Date();
@@ -495,7 +495,7 @@ async function loadTransactions() {
         displayTransactions();
     } catch (error) {
         console.error('Erro ao carregar transações:', error);
-        showNotification('❌ Erro ao conectar ao servidor. Certifique-se de que o servidor está rodando em http://localhost:3000', 'error', 0);
+        showNotification('❌ Erro ao conectar ao servidor. Tente recarregar a página.', 'error', 0);
     }
 }
 
