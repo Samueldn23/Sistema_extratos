@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 });
 
 // Inicializar banco de dados SQLite
-const DB_PATH = process.env.DB_PATH || path.join(__dirname, '..', 'banco', 'sistema_extratos.db');
+const DB_PATH = path.join(__dirname, '..', 'banco', 'sistema_extratos.db');
 const db = new sqlite3.Database(DB_PATH, (err) => {
     if (err) {
         logError('Erro ao conectar ao banco de dados', err);
@@ -148,6 +148,24 @@ function initializeDatabase() {
                 if (!err) {
                     logSuccess(`${row.count} transações no banco de dados`);
                 }
+            });
+
+            // Migração: garantir colunas adicionadas após criação inicial
+            const migrations = [
+                { col: 'usuario_id', sql: 'ALTER TABLE transacoes ADD COLUMN usuario_id TEXT' },
+                { col: 'data_referencia', sql: 'ALTER TABLE transacoes ADD COLUMN data_referencia TEXT' }
+            ];
+            db.all('PRAGMA table_info(transacoes)', (err, cols) => {
+                if (err || !cols) return;
+                const existing = cols.map(c => c.name);
+                migrations.forEach(({ col, sql }) => {
+                    if (!existing.includes(col)) {
+                        db.run(sql, (e) => {
+                            if (e) logWarn(`Migração da coluna ${col} falhou: ${e.message}`);
+                            else logSuccess(`Migração: coluna ${col} adicionada à tabela transacoes`);
+                        });
+                    }
+                });
             });
         }
     });

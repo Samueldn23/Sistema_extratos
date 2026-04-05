@@ -27,13 +27,29 @@ const categories = {
 
 // ==================== HTTP API Layer Functions ====================
 
+function getAuthHeaders(extra = {}) {
+    const headers = { ...extra };
+    if (typeof obterToken === 'function') {
+        const token = obterToken();
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+}
+
+function handleUnauthorized() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('currentUser');
+    if (typeof mostrarTelaLoginModal === 'function') {
+        mostrarTelaLoginModal();
+    }
+}
+
 // Fazer requisição GET
 async function apiGet(endpoint) {
     try {
-        const response = await fetch(`${API_URL}${endpoint}`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        const response = await fetch(`${API_URL}${endpoint}`, { headers: getAuthHeaders() });
+        if (response.status === 401) { handleUnauthorized(); throw new Error('Sessão expirada. Faça login novamente.'); }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error(`Erro ao fazer GET ${endpoint}:`, error);
@@ -46,14 +62,11 @@ async function apiPost(endpoint, data) {
     try {
         const response = await fetch(`${API_URL}${endpoint}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
         });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        if (response.status === 401) { handleUnauthorized(); throw new Error('Sessão expirada. Faça login novamente.'); }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error(`Erro ao fazer POST ${endpoint}:`, error);
@@ -67,14 +80,11 @@ async function apiPut(endpoint, data) {
     try {
         const response = await fetch(`${API_URL}${endpoint}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
         });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        if (response.status === 401) { handleUnauthorized(); throw new Error('Sessão expirada. Faça login novamente.'); }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error(`Erro ao fazer PUT ${endpoint}:`, error);
@@ -88,13 +98,10 @@ async function apiDelete(endpoint) {
     try {
         const response = await fetch(`${API_URL}${endpoint}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: getAuthHeaders({ 'Content-Type': 'application/json' })
         });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        if (response.status === 401) { handleUnauthorized(); throw new Error('Sessão expirada. Faça login novamente.'); }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error(`Erro ao fazer DELETE ${endpoint}:`, error);
@@ -108,14 +115,11 @@ async function apiPatch(endpoint, data) {
     try {
         const response = await fetch(`${API_URL}${endpoint}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
         });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        if (response.status === 401) { handleUnauthorized(); throw new Error('Sessão expirada. Faça login novamente.'); }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error(`Erro ao fazer PATCH ${endpoint}:`, error);
@@ -495,7 +499,7 @@ async function loadTransactions() {
         displayTransactions();
     } catch (error) {
         console.error('Erro ao carregar transações:', error);
-        showNotification('❌ Erro ao conectar ao servidor. Tente recarregar a página.', 'error', 0);
+        showNotification('❌ Erro ao conectar ao servidor. Certifique-se de que o servidor está rodando em http://localhost:3000', 'error', 0);
     }
 }
 
@@ -1247,18 +1251,15 @@ function updateThemeButton() {
 function updateTableAuthStatus() {
     const table = document.querySelector('.transactions-table');
     const dataDropdown = document.getElementById('data-dropdown');
-    const btnAddModal = document.getElementById('btn-add-modal');
 
     if (estaoAutenticado()) {
         // Usuário autenticado - mostrar elementos protegidos
         if (table) table.classList.remove('not-authenticated');
         if (dataDropdown) dataDropdown.classList.remove('not-authenticated');
-        if (btnAddModal) btnAddModal.classList.remove('not-authenticated');
     } else {
         // Usuário não autenticado - ocultar elementos protegidos
         if (table) table.classList.add('not-authenticated');
         if (dataDropdown) dataDropdown.classList.add('not-authenticated');
-        if (btnAddModal) btnAddModal.classList.add('not-authenticated');
     }
 }
 
