@@ -34,9 +34,9 @@ Thumbs.db
 .DS_Store
 
 # Banco de dados
-#*.db
-#*.sqlite
-#*.sqlite3
+*.db
+*.sqlite
+*.sqlite3
 
 # Arquivo de testes (se gerado dinamicamente)
 testes/temp/
@@ -46,5 +46,11 @@ testes/temp/
 *.tmp
 
 # Recursos e arquivos grandes (opcional)
-# recursos/*.xlsm
-# dados/*.json
+recursos/*.xlsm
+dados/*.json
+
+
+# Ignorar pastas de banco de dados
+db/
+banco/
+dados/
