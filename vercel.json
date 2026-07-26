@@ -1,19 +1,14 @@
 {
   "version": 2,
   "buildCommand": "npm install",
-  "outputDirectory": "publico",
   "installCommand": "npm install",
   "env": {
     "NODE_ENV": "production"
   },
-  "routes": [
+  "rewrites": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/publico/$1"
+      "dest": "/api/index.js"
     }
   ]
 }
