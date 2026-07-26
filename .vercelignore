@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Testing
+testes/
+utilitarios/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Local env files
+.env.local
+.env.*.local
+
+# Scripts do Windows
+start.bat
+start.ps1
+iniciar-servidor.bat
+railway.toml
+
+# Documentação
+documentos/
+README.md
