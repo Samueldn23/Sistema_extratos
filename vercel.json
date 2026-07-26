@@ -1,18 +1,19 @@
 {
   "version": 2,
   "buildCommand": "npm install",
-  "devCommand": "node src/servidor.js",
+  "outputDirectory": "publico",
+  "installCommand": "npm install",
   "env": {
     "NODE_ENV": "production"
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/src/servidor.js"
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
     },
     {
-      "source": "/(.*)",
-      "destination": "/publico/$1"
+      "src": "/(.*)",
+      "dest": "/publico/$1"
     }
   ]
 }
