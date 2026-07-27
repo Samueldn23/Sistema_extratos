@@ -1,0 +1,1192 @@
+[
+  {
+    "id": "auto_1773086491947_zcg3yjqqb",
+    "DATA": "2026-04-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 40/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:30"
+  },
+  {
+    "id": "auto_1773086491947_aailkc6ra",
+    "DATA": "2026-03-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 39/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:32:39"
+  },
+  {
+    "id": "auto_1773086491947_d2tsax2ss",
+    "DATA": "2026-02-28T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 38/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_sxm5f1ak7",
+    "DATA": "2026-01-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 37/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:19"
+  },
+  {
+    "id": "auto_1773086491947_yyl1j9mvu",
+    "DATA": "2025-12-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 36/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:16"
+  },
+  {
+    "id": "auto_1773086491947_hu0mchx4d",
+    "DATA": "2025-11-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 35/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:14"
+  },
+  {
+    "id": "auto_1773086491947_nkufnk7hs",
+    "DATA": "2025-10-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 34/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:12"
+  },
+  {
+    "id": "auto_1773086491947_oniw416ok",
+    "DATA": "2025-09-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 33/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:07"
+  },
+  {
+    "id": "auto_1773086491947_c0vqejyqf",
+    "DATA": "2025-08-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 32/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:05"
+  },
+  {
+    "id": "auto_1773086491947_258urg9pf",
+    "DATA": "2025-07-25T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 31/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:33:58"
+  },
+  {
+    "id": "auto_1773086491947_e30v5r7pl",
+    "DATA": "2025-06-27T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 30/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:34:00"
+  },
+  {
+    "id": "auto_1773086491947_bvxui1z9x",
+    "DATA": "2025-05-31T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1060,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_2x68ne6i3",
+    "DATA": "2025-05-29T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_lhdeya0xx",
+    "DATA": "2025-05-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 29/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:35:15"
+  },
+  {
+    "id": "auto_1773086491947_4dt3yt3lk",
+    "DATA": "2025-05-02T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2060,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_y5ruesr6e",
+    "DATA": "2025-04-30T00:00:00",
+    "DESCRIÇÃO": "ALUGUEL CARRO",
+    "VALOR": 200,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_lnqivuo2o",
+    "DATA": "2025-04-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 28/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:43"
+  },
+  {
+    "id": "auto_1773086491947_hgw3pdjs6",
+    "DATA": "2025-03-29T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2060,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_hmsp0lezj",
+    "DATA": "2025-03-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 27/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:44"
+  },
+  {
+    "id": "auto_1773086491947_6nk0fb99y",
+    "DATA": "2025-03-02T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2060,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491947_r969ei1gi",
+    "DATA": "2025-03-01T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 26/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:45"
+  },
+  {
+    "id": "auto_1773086491946_mwwioa1qu",
+    "DATA": "2025-01-29T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2060,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_ku5a14764",
+    "DATA": "2025-01-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 25/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:45"
+  },
+  {
+    "id": "auto_1773086491946_9tnypel02",
+    "DATA": "2024-12-30T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2060,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_ao9z1s663",
+    "DATA": "2024-12-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 24/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:45"
+  },
+  {
+    "id": "auto_1773086491946_pwt8qh0n9",
+    "DATA": "2024-12-02T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_a3x6t2u1v",
+    "DATA": "2024-11-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 23/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:46"
+  },
+  {
+    "id": "auto_1773086491946_wy6fan3hz",
+    "DATA": "2024-10-30T00:00:00",
+    "DESCRIÇÃO": "Pix Ricardo",
+    "VALOR": 170,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_xhs6bn3rb",
+    "DATA": "2024-10-30T00:00:00",
+    "DESCRIÇÃO": "Pix Isabella",
+    "VALOR": 1900,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_3w4lyxrbu",
+    "DATA": "2024-10-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 22/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:46"
+  },
+  {
+    "id": "auto_1773086491946_1zup9ythe",
+    "DATA": "2024-10-07T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 607,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_mpftzw1ru",
+    "DATA": "2024-10-06T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_kr28ah0l4",
+    "DATA": "2024-09-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 21/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:46"
+  },
+  {
+    "id": "auto_1773086491946_olplg7p6i",
+    "DATA": "2024-09-16T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_b5relsesg",
+    "DATA": "2024-08-30T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_1e0xc8bok",
+    "DATA": "2024-08-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 20/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:46"
+  },
+  {
+    "id": "auto_1773086491946_yfflu4ldy",
+    "DATA": "2024-08-14T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491946_xu7iczag5",
+    "DATA": "2024-08-12T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_2fmwcqetj",
+    "DATA": "2024-07-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 19/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:47"
+  },
+  {
+    "id": "auto_1773086491945_qembbgivj",
+    "DATA": "2024-07-04T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_xhf693shm",
+    "DATA": "2024-06-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 18/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:47"
+  },
+  {
+    "id": "auto_1773086491945_jpl2d4qyy",
+    "DATA": "2024-06-07T00:00:00",
+    "DESCRIÇÃO": "Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_5jog6o2lh",
+    "DATA": "2024-05-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 17/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:47"
+  },
+  {
+    "id": "auto_1773086491945_2od8p4j13",
+    "DATA": "2024-05-09T00:00:00",
+    "DESCRIÇÃO": "Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_qslgxc8w6",
+    "DATA": "2024-04-30T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_iwrttdkjm",
+    "DATA": "2024-04-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 16/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:48"
+  },
+  {
+    "id": "auto_1773086491945_ir4mi85xu",
+    "DATA": "2024-04-06T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_k3ny4ittu",
+    "DATA": "2024-04-05T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491945_aeboijasu",
+    "DATA": "2024-03-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 15/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:48"
+  },
+  {
+    "id": "auto_1773086491945_cjw4iwjfs",
+    "DATA": "2024-03-25T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 1800,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_u2xgfz5gt",
+    "DATA": "2024-03-18T00:00:00",
+    "DESCRIÇÃO": "PIX",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_f2yj7siu1",
+    "DATA": "2024-02-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 14/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:49"
+  },
+  {
+    "id": "auto_1773086491944_s1par4ulj",
+    "DATA": "2024-02-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 19/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:49"
+  },
+  {
+    "id": "auto_1773086491944_eb26ddsqu",
+    "DATA": "2024-02-29T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_kwropsm8v",
+    "DATA": "2024-02-24T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_iw287cd83",
+    "DATA": "2024-02-12T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_sz2jytv96",
+    "DATA": "2024-02-09T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1413,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_yz4wit0tb",
+    "DATA": "2024-01-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   18/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:21"
+  },
+  {
+    "id": "auto_1773086491944_be4iskp1c",
+    "DATA": "2024-01-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 13/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:05"
+  },
+  {
+    "id": "auto_1773086491944_mmtk6g4dc",
+    "DATA": "2024-01-20T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_frietxusz",
+    "DATA": "2024-01-19T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_gwjiy793o",
+    "DATA": "2024-01-12T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_dzyffhmsh",
+    "DATA": "2024-01-02T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491944_85vrlmiy5",
+    "DATA": "2023-12-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   17/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:05"
+  },
+  {
+    "id": "auto_1773086491943_p9ok8qd9g",
+    "DATA": "2023-12-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 12/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:06"
+  },
+  {
+    "id": "auto_1773086491943_l84q5xv3s",
+    "DATA": "2023-12-28T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_k3omfv3aj",
+    "DATA": "2023-12-12T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_1578my235",
+    "DATA": "2023-12-09T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1950,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_j7ziksuh9",
+    "DATA": "2023-11-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   16/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:06"
+  },
+  {
+    "id": "auto_1773086491943_kbjbmigvu",
+    "DATA": "2023-11-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 11/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:03"
+  },
+  {
+    "id": "auto_1773086491943_fr3ztpt04",
+    "DATA": "2023-11-09T00:00:00",
+    "DESCRIÇÃO": "Transf. PIX",
+    "VALOR": 1500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_gops40zf9",
+    "DATA": "2023-11-08T00:00:00",
+    "DESCRIÇÃO": "Transf. PIX",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_c54ovci1q",
+    "DATA": "2023-11-07T00:00:00",
+    "DESCRIÇÃO": "Transf. PIX",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_0fki6p7qz",
+    "DATA": "2023-10-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   15/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:02"
+  },
+  {
+    "id": "auto_1773086491943_tp1fgzp69",
+    "DATA": "2023-10-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 10/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:01"
+  },
+  {
+    "id": "auto_1773086491943_y83ofj33d",
+    "DATA": "2023-10-07T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_09swjvkj7",
+    "DATA": "2023-10-06T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1955,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_uu3xtbwdg",
+    "DATA": "2023-10-04T00:00:00",
+    "DESCRIÇÃO": "Desconto Empréstimo",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_s3i61cby4",
+    "DATA": "2023-09-30T00:00:00",
+    "DESCRIÇÃO": "SUPER ADEGA 05/05",
+    "VALOR": -356.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:00"
+  },
+  {
+    "id": "auto_1773086491943_p5ou5mk2u",
+    "DATA": "2023-09-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   14/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:01"
+  },
+  {
+    "id": "auto_1773086491943_0fvu3yzw1",
+    "DATA": "2023-09-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 09/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:00"
+  },
+  {
+    "id": "auto_1773086491943_uri5uvrag",
+    "DATA": "2023-09-08T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 800,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_o9hljgh2n",
+    "DATA": "2023-09-01T00:00:00",
+    "DESCRIÇÃO": "Desconto Empréstimo",
+    "VALOR": 5000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491943_ljdpfgigc",
+    "DATA": "2023-08-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   13/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:07:00"
+  },
+  {
+    "id": "auto_1773086491943_lrm4v5mj7",
+    "DATA": "2023-08-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 08/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:59"
+  },
+  {
+    "id": "auto_1773086491942_5tblnsyp6",
+    "DATA": "2023-08-11T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 500,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_lj7b6w9zd",
+    "DATA": "2023-08-04T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_r8i167b1i",
+    "DATA": "2023-08-03T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1944,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_48ifex1ta",
+    "DATA": "2023-08-02T00:00:00",
+    "DESCRIÇÃO": "Desconto Empréstimo Cezar",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_e6b9uyvw4",
+    "DATA": "2023-08-02T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1300,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_29qxpopgo",
+    "DATA": "2023-08-01T00:00:00",
+    "DESCRIÇÃO": "SUPER ADEGA 04/05",
+    "VALOR": -356.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:59"
+  },
+  {
+    "id": "auto_1773086491942_xh4jf7tym",
+    "DATA": "2023-07-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   12/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:58"
+  },
+  {
+    "id": "auto_1773086491942_wjw9qot5c",
+    "DATA": "2023-07-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 07/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:58"
+  },
+  {
+    "id": "auto_1773086491942_azwbtwjlb",
+    "DATA": "2023-07-10T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_2ycngbi1f",
+    "DATA": "2023-07-07T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1800,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_ylzhr14kn",
+    "DATA": "2023-07-06T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491942_3fv7zxtl8",
+    "DATA": "2023-07-02T00:00:00",
+    "DESCRIÇÃO": "RECARGAPAY*CEZARGU03/03",
+    "VALOR": -581.72,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:58"
+  },
+  {
+    "id": "auto_1773086491942_n4o7wsm96",
+    "DATA": "2023-07-01T00:00:00",
+    "DESCRIÇÃO": "SUPER ADEGA 03/05",
+    "VALOR": -356.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:57"
+  },
+  {
+    "id": "auto_1773086491942_1s7uauh5n",
+    "DATA": "2023-07-01T00:00:00",
+    "DESCRIÇÃO": "RECARGAPAY*CEZARGU03/03",
+    "VALOR": -387.81,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:57"
+  },
+  {
+    "id": "auto_1773086491942_g0bw6yldi",
+    "DATA": "2023-06-30T00:00:00",
+    "DESCRIÇÃO": "A P Almenara-ct A 03/03",
+    "VALOR": -33.34,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:56"
+  },
+  {
+    "id": "auto_1773086491942_bucg5jat8",
+    "DATA": "2023-06-30T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM 06/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:56"
+  },
+  {
+    "id": "auto_1773086491942_phhgsxap1",
+    "DATA": "2023-06-30T00:00:00",
+    "DESCRIÇÃO": "Desconto Empréstimo Cezar",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491941_od6b6ul3u",
+    "DATA": "2023-06-29T00:00:00",
+    "DESCRIÇÃO": "CREDIARIO AUTOM   11/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:56"
+  },
+  {
+    "id": "auto_1773086491941_exhzbgt73",
+    "DATA": "2023-06-09T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 1000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491941_89rp5jtt7",
+    "DATA": "2023-06-07T00:00:00",
+    "DESCRIÇÃO": "Transf. Ted",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491941_dzcqsj3o9",
+    "DATA": "2023-06-07T00:00:00",
+    "DESCRIÇÃO": "Transf. Pix",
+    "VALOR": 2000,
+    "CATEGORIA": "Sem categoria",
+    "pago": 0,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-09 20:01:31"
+  },
+  {
+    "id": "auto_1773086491941_4vcgtk52e",
+    "DATA": "2023-06-02T00:00:00",
+    "DESCRIÇÃO": "RECARGAPAY*CEZARGU02/03",
+    "VALOR": -581.72,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:56"
+  },
+  {
+    "id": "auto_1773086491941_dnfws9ceu",
+    "DATA": "2023-06-01T00:00:00",
+    "DESCRIÇÃO": "SUPER ADEGA 02/05",
+    "VALOR": -356.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:55"
+  },
+  {
+    "id": "auto_1773086491941_sqdw6r0lm",
+    "DATA": "2023-06-01T00:00:00",
+    "DESCRIÇÃO": "RECARGAPAY*CEZARGU02/03",
+    "VALOR": -387.81,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:55"
+  },
+  {
+    "id": "auto_1773086491941_jmghb4hhy",
+    "DATA": "2023-05-30T00:00:00",
+    "DESCRIÇÃO": "A P Almenara-ct A 02/03",
+    "VALOR": -33.34,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:54"
+  },
+  {
+    "id": "auto_1773086491941_qkr66wt5k",
+    "DATA": "2023-05-30T00:00:00",
+    "DESCRIÇÃO": "Crediário autom. 05/40",
+    "VALOR": -2060.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:54"
+  },
+  {
+    "id": "auto_1773086491941_hbsghkeau",
+    "DATA": "2023-05-29T00:00:00",
+    "DESCRIÇÃO": "Crediário autom. 10/19",
+    "VALOR": -2762.92,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:54"
+  },
+  {
+    "id": "auto_1773086491941_nepj5l8rk",
+    "DATA": "2023-05-02T00:00:00",
+    "DESCRIÇÃO": "RECARGAPAY*CEZARGU01/03",
+    "VALOR": -581.72,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:54"
+  },
+  {
+    "id": "auto_1773086491941_qnwuctyfk",
+    "DATA": "2023-05-01T00:00:00",
+    "DESCRIÇÃO": "RECARGA*CEZARGUIMAR",
+    "VALOR": -19.99,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:53"
+  },
+  {
+    "id": "auto_1773086491941_o9l6u9ym5",
+    "DATA": "2023-05-01T00:00:00",
+    "DESCRIÇÃO": "SUPER ADEGA 01/05",
+    "VALOR": -356.08,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:53"
+  },
+  {
+    "id": "auto_1773086491941_6y1r6eh6v",
+    "DATA": "2023-05-01T00:00:00",
+    "DESCRIÇÃO": "RECARGAPAY*CEZARGU01/03",
+    "VALOR": -387.81,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:53"
+  },
+  {
+    "id": "auto_1773086491941_wp62is5kw",
+    "DATA": "2023-04-30T00:00:00",
+    "DESCRIÇÃO": "A P ALMENARA-CT A",
+    "VALOR": -99,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:52"
+  },
+  {
+    "id": "auto_1773086491940_ixybtwvhf",
+    "DATA": "2023-04-30T00:00:00",
+    "DESCRIÇÃO": "JWF ENTRETENIMENTO",
+    "VALOR": -170,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:52"
+  },
+  {
+    "id": "auto_1773086491939_gga7ikmss",
+    "DATA": "2023-04-30T00:00:00",
+    "DESCRIÇÃO": "A P ALMENARA-CT A 01/03",
+    "VALOR": -33.34,
+    "CATEGORIA": "Sem categoria",
+    "pago": 1,
+    "criado_em": "2026-03-09 20:01:31",
+    "atualizado_em": "2026-03-10 16:06:52"
+  }
+]

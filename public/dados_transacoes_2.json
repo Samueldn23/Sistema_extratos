@@ -1,0 +1,597 @@
+[
+    {
+        "DATA": "2023-04-30T00:00:00",
+        "DESCRIÇÃO": "A P ALMENARA-CT A 01/03",
+        "VALOR": -33.34
+    },
+    {
+        "DATA": "2023-04-30T00:00:00",
+        "DESCRIÇÃO": "JWF ENTRETENIMENTO",
+        "VALOR": -170.0
+    },
+    {
+        "DATA": "2023-04-30T00:00:00",
+        "DESCRIÇÃO": "A P ALMENARA-CT A",
+        "VALOR": -99.0
+    },
+    {
+        "DATA": "2023-05-01T00:00:00",
+        "DESCRIÇÃO": "RECARGAPAY*CEZARGU01/03",
+        "VALOR": -387.81
+    },
+    {
+        "DATA": "2023-05-01T00:00:00",
+        "DESCRIÇÃO": "SUPER ADEGA 01/05",
+        "VALOR": -356.08
+    },
+    {
+        "DATA": "2023-05-01T00:00:00",
+        "DESCRIÇÃO": "RECARGA*CEZARGUIMAR",
+        "VALOR": -19.99
+    },
+    {
+        "DATA": "2023-05-02T00:00:00",
+        "DESCRIÇÃO": "RECARGAPAY*CEZARGU01/03",
+        "VALOR": -581.72
+    },
+    {
+        "DATA": "2023-05-29T00:00:00",
+        "DESCRIÇÃO": "Crediário autom. 10/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-05-30T00:00:00",
+        "DESCRIÇÃO": "Crediário autom. 05/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-05-30T00:00:00",
+        "DESCRIÇÃO": "A P Almenara-ct A 02/03",
+        "VALOR": -33.34
+    },
+    {
+        "DATA": "2023-06-01T00:00:00",
+        "DESCRIÇÃO": "RECARGAPAY*CEZARGU02/03",
+        "VALOR": -387.81
+    },
+    {
+        "DATA": "2023-06-01T00:00:00",
+        "DESCRIÇÃO": "SUPER ADEGA 02/05",
+        "VALOR": -356.08
+    },
+    {
+        "DATA": "2023-06-02T00:00:00",
+        "DESCRIÇÃO": "RECARGAPAY*CEZARGU02/03",
+        "VALOR": -581.72
+    },
+    {
+        "DATA": "2023-06-07T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-06-07T00:00:00",
+        "DESCRIÇÃO": "Transf. Ted",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-06-09T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2023-06-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   11/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-06-30T00:00:00",
+        "DESCRIÇÃO": "Desconto Empréstimo Cezar",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-06-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 06/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-06-30T00:00:00",
+        "DESCRIÇÃO": "A P Almenara-ct A 03/03",
+        "VALOR": -33.34
+    },
+    {
+        "DATA": "2023-07-01T00:00:00",
+        "DESCRIÇÃO": "RECARGAPAY*CEZARGU03/03",
+        "VALOR": -387.81
+    },
+    {
+        "DATA": "2023-07-01T00:00:00",
+        "DESCRIÇÃO": "SUPER ADEGA 03/05",
+        "VALOR": -356.08
+    },
+    {
+        "DATA": "2023-07-02T00:00:00",
+        "DESCRIÇÃO": "RECARGAPAY*CEZARGU03/03",
+        "VALOR": -581.72
+    },
+    {
+        "DATA": "2023-07-06T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-07-07T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1800.0
+    },
+    {
+        "DATA": "2023-07-10T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2023-07-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 07/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-07-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   12/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-08-01T00:00:00",
+        "DESCRIÇÃO": "SUPER ADEGA 04/05",
+        "VALOR": -356.08
+    },
+    {
+        "DATA": "2023-08-02T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1300.0
+    },
+    {
+        "DATA": "2023-08-02T00:00:00",
+        "DESCRIÇÃO": "Desconto Empréstimo Cezar",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-08-03T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1944.0
+    },
+    {
+        "DATA": "2023-08-04T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2023-08-11T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2023-08-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 08/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-08-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   13/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-09-01T00:00:00",
+        "DESCRIÇÃO": "Desconto Empréstimo",
+        "VALOR": 5000.0
+    },
+    {
+        "DATA": "2023-09-08T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 800.0
+    },
+    {
+        "DATA": "2023-09-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 09/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-09-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   14/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-09-30T00:00:00",
+        "DESCRIÇÃO": "SUPER ADEGA 05/05",
+        "VALOR": -356.08
+    },
+    {
+        "DATA": "2023-10-04T00:00:00",
+        "DESCRIÇÃO": "Desconto Empréstimo",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2023-10-06T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1955.0
+    },
+    {
+        "DATA": "2023-10-07T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-10-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 10/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-10-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   15/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-11-07T00:00:00",
+        "DESCRIÇÃO": "Transf. PIX",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2023-11-08T00:00:00",
+        "DESCRIÇÃO": "Transf. PIX",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2023-11-09T00:00:00",
+        "DESCRIÇÃO": "Transf. PIX",
+        "VALOR": 1500.0
+    },
+    {
+        "DATA": "2023-11-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 11/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-11-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   16/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2023-12-09T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1950.0
+    },
+    {
+        "DATA": "2023-12-12T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2023-12-28T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1500.0
+    },
+    {
+        "DATA": "2023-12-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 12/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2023-12-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   17/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2024-01-02T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2024-01-12T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-01-19T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-01-20T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2024-01-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 13/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-01-30T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM   18/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2024-02-09T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1413.0
+    },
+    {
+        "DATA": "2024-02-12T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2024-02-24T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 1500.0
+    },
+    {
+        "DATA": "2024-02-29T00:00:00",
+        "DESCRIÇÃO": "Transf. Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-02-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 19/19",
+        "VALOR": -2762.92
+    },
+    {
+        "DATA": "2024-02-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 14/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-03-18T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2024-03-25T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1800.0
+    },
+    {
+        "DATA": "2024-03-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 15/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-04-05T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2024-04-06T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2024-04-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 16/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-04-30T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2024-05-09T00:00:00",
+        "DESCRIÇÃO": "Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-05-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 17/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-06-07T00:00:00",
+        "DESCRIÇÃO": "Pix",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-06-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 18/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-07-04T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-07-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 19/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-08-12T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2024-08-14T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-08-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 20/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-08-30T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1500.0
+    },
+    {
+        "DATA": "2024-09-16T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 500.0
+    },
+    {
+        "DATA": "2024-09-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 21/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-10-06T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-10-07T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 607.0
+    },
+    {
+        "DATA": "2024-10-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 22/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-10-30T00:00:00",
+        "DESCRIÇÃO": "Pix Isabella",
+        "VALOR": 1900.0
+    },
+    {
+        "DATA": "2024-10-30T00:00:00",
+        "DESCRIÇÃO": "Pix Ricardo",
+        "VALOR": 170.0
+    },
+    {
+        "DATA": "2024-11-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 23/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-12-02T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2000.0
+    },
+    {
+        "DATA": "2024-12-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 24/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2024-12-30T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2060.0
+    },
+    {
+        "DATA": "2025-01-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 25/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-01-29T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2060.0
+    },
+    {
+        "DATA": "2025-03-01T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 26/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-03-02T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2060.0
+    },
+    {
+        "DATA": "2025-03-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 27/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-03-29T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2060.0
+    },
+    {
+        "DATA": "2025-04-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 28/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-04-30T00:00:00",
+        "DESCRIÇÃO": "ALUGUEL CARRO",
+        "VALOR": 200.0
+    },
+    {
+        "DATA": "2025-05-02T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 2060.0
+    },
+    {
+        "DATA": "2025-05-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 29/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-05-29T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1000.0
+    },
+    {
+        "DATA": "2025-05-31T00:00:00",
+        "DESCRIÇÃO": "PIX",
+        "VALOR": 1060.0
+    },
+    {
+        "DATA": "2025-06-27T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 30/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-07-25T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 31/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-08-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 32/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-09-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 33/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-10-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 34/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-11-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 35/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2025-12-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 36/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2026-01-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 37/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2026-02-28T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 38/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2026-03-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 39/40",
+        "VALOR": -2060.08
+    },
+    {
+        "DATA": "2026-04-29T00:00:00",
+        "DESCRIÇÃO": "CREDIARIO AUTOM 40/40",
+        "VALOR": -2060.08
+    }
+]

@@ -479,10 +479,26 @@ async function loadTransactions() {
         if (allTransactions.length === 0) {
             showNotification('⏳ Nenhuma transação encontrada. Tentando importar dados...', 'info', 0);
             try {
-                await importJsonDataToDB();
+                // Importação automática: busca dados.json sem autenticação
+                const response = await fetch('dados.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        // Enviar direto para a API (sem wrapper de auth)
+                        const importRes = await fetch(`${API_URL}/import-json`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ transactions: data })
+                        });
+                        if (importRes.ok) {
+                            const result = await importRes.json();
+                            console.log(`✓ Importação automática: ${result.importados} transações`);
+                        }
+                    }
+                }
                 allTransactions = await loadAllTransactions();
             } catch (error) {
-                console.warn('Erro ao importar dados:', error);
+                console.warn('Erro ao importar dados automaticamente:', error);
             }
         }
 
