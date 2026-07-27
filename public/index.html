@@ -65,11 +65,35 @@
                 <!-- Navegação de Período -->
                 <div class="toolbar-group toolbar-nav">
                     <button class="btn-nav" id="prev-month" title="Mês anterior">◀</button>
-                    <div class="period-display" id="period-display" title="Clique para voltar ao mês atual">
+                    <div class="period-display" id="period-display" title="Clique para escolher o mês">
                         <span class="period-month" id="current-month">Março</span>
                         <span class="period-year" id="current-year">2026</span>
                     </div>
                     <button class="btn-nav" id="next-month" title="Próximo mês">▶</button>
+
+                    <!-- Month Picker Popup -->
+                    <div class="month-picker" id="month-picker">
+                        <div class="month-picker-header">
+                            <button class="month-picker-year-btn" id="month-picker-prev-year">◀</button>
+                            <span class="month-picker-year" id="month-picker-year">2026</span>
+                            <button class="month-picker-year-btn" id="month-picker-next-year">▶</button>
+                        </div>
+                        <div class="month-picker-grid" id="month-picker-grid">
+                            <button class="month-picker-item" data-month="0">Jan</button>
+                            <button class="month-picker-item" data-month="1">Fev</button>
+                            <button class="month-picker-item" data-month="2">Mar</button>
+                            <button class="month-picker-item" data-month="3">Abr</button>
+                            <button class="month-picker-item" data-month="4">Mai</button>
+                            <button class="month-picker-item" data-month="5">Jun</button>
+                            <button class="month-picker-item" data-month="6">Jul</button>
+                            <button class="month-picker-item" data-month="7">Ago</button>
+                            <button class="month-picker-item" data-month="8">Set</button>
+                            <button class="month-picker-item" data-month="9">Out</button>
+                            <button class="month-picker-item" data-month="10">Nov</button>
+                            <button class="month-picker-item" data-month="11">Dez</button>
+                        </div>
+                        <button class="month-picker-today" id="month-picker-today">📅 Mês Atual</button>
+                    </div>
                 </div>
 
                 <!-- Ações Rápidas -->

@@ -481,6 +481,120 @@ body {
     font-weight: 400;
 }
 
+/* ==================== Month Picker ==================== */
+.toolbar-nav {
+    position: relative;
+}
+
+.month-picker {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    padding: 12px;
+    min-width: 260px;
+}
+
+.month-picker.active {
+    display: block;
+}
+
+.month-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.month-picker-year {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.month-picker-year-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-dark);
+    font-size: 0.8em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+}
+
+.month-picker-year-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.month-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.month-picker-item {
+    padding: 8px 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-dark);
+    font-size: 0.8em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-align: center;
+}
+
+.month-picker-item:hover {
+    background: var(--light-bg);
+    border-color: var(--primary-color);
+}
+
+.month-picker-item.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    font-weight: 700;
+}
+
+.month-picker-item.current-month {
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
+.month-picker-today {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.month-picker-today:hover {
+    background: var(--light-bg);
+    color: var(--text-dark);
+}
+
 /* Toolbar buttons */
 .toolbar-btn {
     display: flex;
