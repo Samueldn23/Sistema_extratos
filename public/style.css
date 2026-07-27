@@ -676,6 +676,210 @@ body {
     background: #b91c1c;
 }
 
+/* ==================== Filters Section ==================== */
+.filters-section {
+    margin-bottom: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+}
+
+.filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-label {
+    font-size: 0.75em;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-btn-group {
+    display: flex;
+    gap: 2px;
+    background: var(--dark-bg);
+    border-radius: 8px;
+    padding: 2px;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-light);
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-dark);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.filter-select {
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: var(--card-bg);
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(91, 79, 191, 0.1);
+}
+
+.filter-range {
+    min-width: 0;
+}
+
+.filter-range-inputs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-input-small {
+    width: 80px;
+    padding: 6px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: var(--card-bg);
+}
+
+.filter-input-date {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: var(--card-bg);
+}
+
+.filter-input-small:focus,
+.filter-input-date:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(91, 79, 191, 0.1);
+}
+
+.filter-separator {
+    color: var(--text-light);
+    font-size: 0.85em;
+}
+
+.filter-btn-clear {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.8em;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-light);
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+.filter-btn-clear:hover {
+    background: var(--danger-color);
+    color: white;
+    border-color: var(--danger-color);
+}
+
+/* Sortable column headers */
+.sortable-header {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.sortable-header:hover {
+    background: rgba(91, 79, 191, 0.05);
+}
+
+.sortable-header::after {
+    content: ' ⇅';
+    font-size: 0.8em;
+    opacity: 0.3;
+}
+
+.sortable-header.sort-asc::after {
+    content: ' ↑';
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.sortable-header.sort-desc::after {
+    content: ' ↓';
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+/* Filter badge indicator */
+.filter-active-badge {
+    display: none;
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.65em;
+    padding: 1px 5px;
+    border-radius: 10px;
+    margin-left: 4px;
+    font-weight: 700;
+}
+
+.filters-section.has-active-filters .filter-active-badge {
+    display: inline;
+}
+
+/* Responsive filters */
+@media (max-width: 768px) {
+    .filters-row {
+        gap: 8px;
+    }
+    .filter-group {
+        flex: 1 1 100%;
+    }
+    .filter-range-inputs {
+        width: 100%;
+    }
+    .filter-input-date {
+        flex: 1;
+    }
+}
+
 /* ==================== COLUMN FILTER ==================== */
 
 .column-filter-inline {

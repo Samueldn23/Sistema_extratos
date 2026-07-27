@@ -148,6 +148,71 @@
                 </div>
             </section>
 
+            <!-- Barra de Filtros -->
+            <section class="filters-section" id="filters-section">
+                <div class="filters-row">
+                    <!-- Filtro Tipo -->
+                    <div class="filter-group">
+                        <label class="filter-label">Tipo</label>
+                        <div class="filter-btn-group" id="filter-type">
+                            <button class="filter-btn active" data-value="todos">Todos</button>
+                            <button class="filter-btn" data-value="receita">📈 Receitas</button>
+                            <button class="filter-btn" data-value="despesa">📉 Despesas</button>
+                        </div>
+                    </div>
+
+                    <!-- Filtro Status -->
+                    <div class="filter-group">
+                        <label class="filter-label">Status</label>
+                        <div class="filter-btn-group" id="filter-status">
+                            <button class="filter-btn active" data-value="todos">Todos</button>
+                            <button class="filter-btn" data-value="pago">✅ Pagos</button>
+                            <button class="filter-btn" data-value="pendente">⏳ Pendentes</button>
+                        </div>
+                    </div>
+
+                    <!-- Filtro Categoria -->
+                    <div class="filter-group">
+                        <label class="filter-label">Categoria</label>
+                        <select id="filter-category" class="filter-select">
+                            <option value="todos">Todas</option>
+                            <option value="alimentacao">🍕 Alimentação</option>
+                            <option value="transporte">🚗 Transporte</option>
+                            <option value="saude">🏥 Saúde</option>
+                            <option value="lazer">🎮 Lazer</option>
+                            <option value="trabalho">💼 Trabalho</option>
+                            <option value="compras">🛍️ Compras</option>
+                            <option value="outros">📌 Outros</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro Valor -->
+                    <div class="filter-group filter-range">
+                        <label class="filter-label">Valor</label>
+                        <div class="filter-range-inputs">
+                            <input type="number" id="filter-min-value" class="filter-input-small" placeholder="Mín">
+                            <span class="filter-separator">—</span>
+                            <input type="number" id="filter-max-value" class="filter-input-small" placeholder="Máx">
+                        </div>
+                    </div>
+
+                    <!-- Filtro Período -->
+                    <div class="filter-group filter-range">
+                        <label class="filter-label">Período</label>
+                        <div class="filter-range-inputs">
+                            <input type="date" id="filter-date-start" class="filter-input-date">
+                            <span class="filter-separator">até</span>
+                            <input type="date" id="filter-date-end" class="filter-input-date">
+                        </div>
+                    </div>
+
+                    <!-- Botão Limpar Filtros -->
+                    <button class="filter-btn-clear" id="btn-clear-filters" title="Limpar todos os filtros">
+                        🗑️ Limpar
+                    </button>
+                </div>
+            </section>
+
             <!-- Painel de Filtro (oculto) -->
             <section class="column-filter-panel" id="column-filter-panel" style="display: none;"></section>
 
@@ -193,11 +258,11 @@
                     <table class="transactions-table">
                         <thead>
                             <tr>
-                                <th>Data</th>
+                                <th class="sortable-header sort-desc" data-sort="DATA">Data</th>
                                 <th>Data de Ref.</th>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                                <th>Tipo</th>
+                                <th class="sortable-header" data-sort="DESCRIÇÃO">Descrição</th>
+                                <th class="sortable-header" data-sort="VALOR">Valor</th>
+                                <th class="sortable-header" data-sort="CATEGORIA">Tipo</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>
@@ -243,6 +308,18 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="transactionCategory">📂 Categoria</label>
+                    <select id="transactionCategory">
+                        <option value="outros">📌 Outros</option>
+                        <option value="alimentacao">🍕 Alimentação</option>
+                        <option value="transporte">🚗 Transporte</option>
+                        <option value="saude">🏥 Saúde</option>
+                        <option value="lazer">🎮 Lazer</option>
+                        <option value="trabalho">💼 Trabalho</option>
+                        <option value="compras">🛍️ Compras</option>
+                    </select>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-cancel" id="cancelBtn">Cancelar</button>
                     <button type="submit" class="btn-submit">Adicionar</button>
@@ -284,6 +361,18 @@
                             <option value="despesa">Despesa</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="editTransactionCategory">📂 Categoria</label>
+                    <select id="editTransactionCategory">
+                        <option value="outros">📌 Outros</option>
+                        <option value="alimentacao">🍕 Alimentação</option>
+                        <option value="transporte">🚗 Transporte</option>
+                        <option value="saude">🏥 Saúde</option>
+                        <option value="lazer">🎮 Lazer</option>
+                        <option value="trabalho">💼 Trabalho</option>
+                        <option value="compras">🛍️ Compras</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-cancel" id="cancelEditBtn">Cancelar</button>

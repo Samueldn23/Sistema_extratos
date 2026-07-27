@@ -11,6 +11,20 @@ let editingId = null;
 let editingTransaction = null;
 let searchActive = false;
 
+// Estado dos filtros
+let filters = {
+    type: 'todos',
+    status: 'todos',
+    category: 'todos',
+    minValue: null,
+    maxValue: null,
+    dateStart: null,
+    dateEnd: null
+};
+
+// Estado da ordenação
+let sortConfig = { field: 'DATA', direction: 'desc' };
+
 // Mês e anos disponíveis
 const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
@@ -517,6 +531,144 @@ async function loadTransactions() {
 }
 
 // Exibir transações filtradas (refatorado para remover duplicação)
+// ==================== Filter Functions ====================
+
+function applyFilters(transactions) {
+    return transactions.filter(t => {
+        // Filtro por Tipo (Receita/Despesa)
+        if (filters.type !== 'todos') {
+            const valor = parseFloat(t['VALOR']);
+            if (filters.type === 'receita' && valor < 0) return false;
+            if (filters.type === 'despesa' && valor >= 0) return false;
+        }
+
+        // Filtro por Status (Pago/Pendente)
+        if (filters.status !== 'todos') {
+            if (filters.status === 'pago' && !t.pago) return false;
+            if (filters.status === 'pendente' && t.pago) return false;
+        }
+
+        // Filtro por Categoria
+        if (filters.category !== 'todos') {
+            const cat = (t['CATEGORIA'] || 'outros').toLowerCase();
+            if (cat !== filters.category) return false;
+        }
+
+        // Filtro por Valor Mínimo
+        if (filters.minValue !== null) {
+            const valor = parseFloat(t['VALOR']);
+            if (valor < filters.minValue) return false;
+        }
+
+        // Filtro por Valor Máximo
+        if (filters.maxValue !== null) {
+            const valor = parseFloat(t['VALOR']);
+            if (valor > filters.maxValue) return false;
+        }
+
+        // Filtro por Data Início
+        if (filters.dateStart) {
+            const dateToUse = t.data_referencia || t.DATA;
+            const date = new Date(dateToUse);
+            const start = new Date(filters.dateStart);
+            if (date < start) return false;
+        }
+
+        // Filtro por Data Fim
+        if (filters.dateEnd) {
+            const dateToUse = t.data_referencia || t.DATA;
+            const date = new Date(dateToUse);
+            const end = new Date(filters.dateEnd);
+            end.setHours(23, 59, 59);
+            if (date > end) return false;
+        }
+
+        return true;
+    });
+}
+
+function applySorting(transactions) {
+    const sorted = [...transactions];
+    sorted.sort((a, b) => {
+        let valA, valB;
+
+        switch (sortConfig.field) {
+            case 'DATA':
+                valA = a.data_referencia || a.DATA;
+                valB = b.data_referencia || b.DATA;
+                return sortConfig.direction === 'asc'
+                    ? compareISODates(valA, valB)
+                    : compareISODates(valB, valA);
+            case 'VALOR':
+                valA = parseFloat(a['VALOR']) || 0;
+                valB = parseFloat(b['VALOR']) || 0;
+                break;
+            case 'DESCRIÇÃO':
+                valA = (a['DESCRIÇÃO'] || '').toLowerCase();
+                valB = (b['DESCRIÇÃO'] || '').toLowerCase();
+                return sortConfig.direction === 'asc'
+                    ? valA.localeCompare(valB)
+                    : valB.localeCompare(valA);
+            case 'CATEGORIA':
+                valA = (a['CATEGORIA'] || 'outros').toLowerCase();
+                valB = (b['CATEGORIA'] || 'outros').toLowerCase();
+                return sortConfig.direction === 'asc'
+                    ? valA.localeCompare(valB)
+                    : valB.localeCompare(valA);
+            default:
+                return 0;
+        }
+
+        return sortConfig.direction === 'asc' ? valA - valB : valB - valA;
+    });
+    return sorted;
+}
+
+function hasActiveFilters() {
+    return filters.type !== 'todos' ||
+           filters.status !== 'todos' ||
+           filters.category !== 'todos' ||
+           filters.minValue !== null ||
+           filters.maxValue !== null ||
+           filters.dateStart !== null ||
+           filters.dateEnd !== null;
+}
+
+function clearAllFilters() {
+    filters = {
+        type: 'todos',
+        status: 'todos',
+        category: 'todos',
+        minValue: null,
+        maxValue: null,
+        dateStart: null,
+        dateEnd: null
+    };
+
+    // Reset UI
+    document.querySelectorAll('#filter-type .filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.value === 'todos');
+    });
+    document.querySelectorAll('#filter-status .filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.value === 'todos');
+    });
+    document.getElementById('filter-category').value = 'todos';
+    document.getElementById('filter-min-value').value = '';
+    document.getElementById('filter-max-value').value = '';
+    document.getElementById('filter-date-start').value = '';
+    document.getElementById('filter-date-end').value = '';
+
+    document.getElementById('filters-section').classList.remove('has-active-filters');
+    displayTransactions();
+}
+
+function updateFilterBadge() {
+    const section = document.getElementById('filters-section');
+    section.classList.toggle('has-active-filters', hasActiveFilters());
+}
+
+// ==================== Display Transactions ====================
+
 function displayTransactions() {
     const tbody = document.getElementById('transactions-body');
     const noDataMsg = document.getElementById('no-data-message');
@@ -550,12 +702,14 @@ function displayTransactions() {
 
     filtered = [...filtered, ...unpaidExpenses];
 
-    // Ordenar por data_referencia (ou DATA se não existir) - ordem crescente
-    filtered.sort((a, b) => {
-        const dateA = a.data_referencia || a.DATA;
-        const dateB = b.data_referencia || b.DATA;
-        return compareISODates(dateA, dateB);
-    });
+    // Aplicar filtros adicionais
+    filtered = applyFilters(filtered);
+
+    // Aplicar ordenação
+    filtered = applySorting(filtered);
+
+    // Atualizar badge de filtros ativos
+    updateFilterBadge();
 
     renderTransactionsTable(filtered, monthIndex, year, filteredForSummary);
 }
@@ -770,6 +924,7 @@ function openEditTransactionModal(transaction) {
     document.getElementById('editTransactionDesc').value = transaction['DESCRIÇÃO'] || '';
     document.getElementById('editTransactionValue').value = value.toFixed(2);
     document.getElementById('editTransactionType').value = isReceita ? 'receita' : 'despesa';
+    document.getElementById('editTransactionCategory').value = (transaction['CATEGORIA'] || 'outros').toLowerCase();
 }
 
 function closeAddTransactionModal() {
@@ -795,6 +950,7 @@ async function saveAddTransaction(event) {
         const description = document.getElementById('transactionDesc').value;
         const valueStr = document.getElementById('transactionValue').value;
         const type = document.getElementById('transactionType').value;
+        const category = document.getElementById('transactionCategory').value;
 
         // Validação
         if (!date || !isValidDate(date)) {
@@ -824,7 +980,7 @@ async function saveAddTransaction(event) {
             DATA: dateLocalToISO(date),
             'DESCRIÇÃO': description.trim(),
             'VALOR': value,
-            'CATEGORIA': 'outros',
+            'CATEGORIA': category || 'outros',
             pago: false,
             data_referencia: monthRef ? monthToDateISO(monthRef) : undefined // Converter mês para ISO date
         };
@@ -852,6 +1008,7 @@ async function saveEditTransaction(event) {
         const description = document.getElementById('editTransactionDesc').value;
         const valueStr = document.getElementById('editTransactionValue').value;
         const type = document.getElementById('editTransactionType').value;
+        const category = document.getElementById('editTransactionCategory').value;
 
         // Validação
         if (!date || !isValidDate(date)) {
@@ -880,7 +1037,7 @@ async function saveEditTransaction(event) {
             DATA: dateLocalToISO(date),
             'DESCRIÇÃO': description.trim(),
             'VALOR': value,
-            'CATEGORIA': 'outros',
+            'CATEGORIA': category || 'outros',
             data_referencia: monthRef ? monthToDateISO(monthRef) : undefined // Converter mês para ISO date
         };
 
@@ -1460,6 +1617,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btn-clear-database').addEventListener('click', clearAllDatabase);
     document.getElementById('btn-toggle-theme').addEventListener('click', toggleTheme);
+
+    // ==================== Filter Event Listeners ====================
+
+    // Filtro Tipo
+    document.querySelectorAll('#filter-type .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#filter-type .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filters.type = btn.dataset.value;
+            displayTransactions();
+        });
+    });
+
+    // Filtro Status
+    document.querySelectorAll('#filter-status .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#filter-status .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filters.status = btn.dataset.value;
+            displayTransactions();
+        });
+    });
+
+    // Filtro Categoria
+    document.getElementById('filter-category').addEventListener('change', (e) => {
+        filters.category = e.target.value;
+        displayTransactions();
+    });
+
+    // Filtro Valor (com debounce)
+    let valueFilterTimeout;
+    const setupValueFilter = (inputId, key) => {
+        document.getElementById(inputId).addEventListener('input', (e) => {
+            clearTimeout(valueFilterTimeout);
+            valueFilterTimeout = setTimeout(() => {
+                const val = e.target.value.trim();
+                filters[key] = val === '' ? null : parseFloat(val);
+                displayTransactions();
+            }, 300);
+        });
+    };
+    setupValueFilter('filter-min-value', 'minValue');
+    setupValueFilter('filter-max-value', 'maxValue');
+
+    // Filtro Período
+    document.getElementById('filter-date-start').addEventListener('change', (e) => {
+        filters.dateStart = e.target.value || null;
+        displayTransactions();
+    });
+    document.getElementById('filter-date-end').addEventListener('change', (e) => {
+        filters.dateEnd = e.target.value || null;
+        displayTransactions();
+    });
+
+    // Botão Limpar Filtros
+    document.getElementById('btn-clear-filters').addEventListener('click', clearAllFilters);
+
+    // Ordenação por coluna
+    document.querySelectorAll('.sortable-header').forEach(th => {
+        th.addEventListener('click', () => {
+            const field = th.dataset.sort;
+            if (sortConfig.field === field) {
+                sortConfig.direction = sortConfig.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortConfig.field = field;
+                sortConfig.direction = 'desc';
+            }
+            // Atualizar classes visuais
+            document.querySelectorAll('.sortable-header').forEach(h => {
+                h.classList.remove('sort-asc', 'sort-desc');
+            });
+            th.classList.add(sortConfig.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+            displayTransactions();
+        });
+    });
 
     // ==================== Dropdown Menus ====================
     setupDropdown('btn-data-menu', 'data-dropdown-menu');
