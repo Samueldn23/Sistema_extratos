@@ -177,6 +177,9 @@ function mostrarTelaLoginModal() {
                     <button type="submit" class="btn-auth-submit">Entrar</button>
                     <div id="login-error" class="auth-error"></div>
                 </form>
+                <div class="auth-demo">
+                    <p>📝 Login</p>
+                </div>
             </div>
         </div>
     `;
