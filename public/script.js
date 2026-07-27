@@ -1433,24 +1433,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-clear-search').addEventListener('click', clearSearch);
 
     // File Operations
-    document.getElementById('btn-import-json').addEventListener('click', async () => {
-        if (confirm('Deseja importar dados do JSON?')) {
-            try {
-                const count = await importJsonDataToDB();
-                allTransactions = await loadAllTransactions();
-                if (searchActive) {
-                    filterTransactionsBySearch(document.getElementById('search-input').value.toLowerCase());
-                } else {
-                    displayTransactions();
-                }
-                if (count > 0) alert(`✓ ${count} transações importadas!`);
-            } catch (error) {
-                alert('Erro ao importar dados.');
-            }
-        }
-    });
-
-    document.getElementById('btn-upload-json').addEventListener('click', () => {
+    document.getElementById('btn-import-json').addEventListener('click', () => {
         document.getElementById('json-file-input').click();
     });
 
