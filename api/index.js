@@ -40,7 +40,7 @@ function verificarToken(req, res, next) {
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// Servir arquivos estáticos da pasta public (renomeada de publico)
+// Servir arquivos estáticos da pasta public
 const publicPath = path.join(__dirname, '..', 'public');
 app.use(express.static(publicPath));
 
@@ -51,21 +51,37 @@ app.use('/api/auth', authRoutes);
 
 // ==================== ROTAS DE TRANSAÇÕES ====================
 
+// Mapear colunas do Supabase (minúsculo) para o formato do frontend (maiúsculo/acento)
+function mapearTransacao(t) {
+    if (!t) return t;
+    return {
+        id: t.id,
+        DATA: t.data,
+        DESCRIÇÃO: t.descricao,
+        VALOR: t.valor,
+        CATEGORIA: t.categoria,
+        pago: t.pago,
+        data_referencia: t.data_referencia,
+        criado_em: t.criado_em,
+        atualizado_em: t.atualizado_em
+    };
+}
+
 // GET - Listar todas as transações
 app.get('/api/transactions', verificarToken, async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('transacoes')
             .select('*')
-            .eq('usuario_id', req.usuario.id)
-            .order('DATA', { ascending: false });
+            .order('data', { ascending: false });
 
         if (error) {
             console.error('Erro ao buscar transações:', error);
             return res.status(500).json({ error: 'Erro ao buscar transações' });
         }
 
-        res.json({ data: data || [] });
+        const mapped = (data || []).map(mapearTransacao);
+        res.json({ data: mapped });
     } catch (error) {
         console.error('Erro:', error);
         res.status(500).json({ error: 'Erro interno do servidor' });
@@ -88,13 +104,12 @@ app.post('/api/transactions', verificarToken, async (req, res) => {
             .from('transacoes')
             .insert({
                 id: id || `txn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-                DATA,
-                DESCRIÇÃO: DESCRIÇÃO.trim(),
-                VALOR: parseFloat(VALOR),
-                CATEGORIA: (CATEGORIA || 'Sem categoria').trim(),
+                data: DATA,
+                descricao: DESCRIÇÃO.trim(),
+                valor: parseFloat(VALOR),
+                categoria: (CATEGORIA || 'Sem categoria').trim(),
                 pago: pago ? 1 : 0,
                 data_referencia: dataRef,
-                usuario_id: req.usuario.id,
                 criado_em: new Date().toISOString(),
                 atualizado_em: new Date().toISOString()
             })
@@ -106,7 +121,7 @@ app.post('/api/transactions', verificarToken, async (req, res) => {
             return res.status(500).json({ error: 'Erro ao criar transação' });
         }
 
-        res.json({ transaction: data });
+        res.json({ transaction: mapearTransacao(data) });
     } catch (error) {
         console.error('Erro:', error);
         res.status(500).json({ error: 'Erro interno do servidor' });
@@ -119,14 +134,14 @@ app.put('/api/transactions/:id', verificarToken, async (req, res) => {
         const { id } = req.params;
         const { DATA, DESCRIÇÃO, VALOR, CATEGORIA, pago, data_referencia } = req.body;
 
-        // Verificar se a transação pertence ao usuário
+        // Verificar se a transação existe
         const { data: existing } = await supabase
             .from('transacoes')
-            .select('usuario_id')
+            .select('id')
             .eq('id', id)
             .single();
 
-        if (!existing || existing.usuario_id !== req.usuario.id) {
+        if (!existing) {
             return res.status(404).json({ error: 'Transação não encontrada' });
         }
 
@@ -135,10 +150,10 @@ app.put('/api/transactions/:id', verificarToken, async (req, res) => {
         const { data, error } = await supabase
             .from('transacoes')
             .update({
-                DATA,
-                DESCRIÇÃO: DESCRIÇÃO.trim(),
-                VALOR: parseFloat(VALOR),
-                CATEGORIA: (CATEGORIA || 'Sem categoria').trim(),
+                data: DATA,
+                descricao: DESCRIÇÃO.trim(),
+                valor: parseFloat(VALOR),
+                categoria: (CATEGORIA || 'Sem categoria').trim(),
                 pago: pago ? 1 : 0,
                 data_referencia: dataRef,
                 atualizado_em: new Date().toISOString()
@@ -152,7 +167,7 @@ app.put('/api/transactions/:id', verificarToken, async (req, res) => {
             return res.status(500).json({ error: 'Erro ao atualizar transação' });
         }
 
-        res.json({ transaction: data });
+        res.json({ transaction: mapearTransacao(data) });
     } catch (error) {
         console.error('Erro:', error);
         res.status(500).json({ error: 'Erro interno do servidor' });
@@ -164,14 +179,14 @@ app.delete('/api/transactions/:id', verificarToken, async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Verificar se a transação pertence ao usuário
+        // Verificar se a transação existe
         const { data: existing } = await supabase
             .from('transacoes')
-            .select('usuario_id')
+            .select('id')
             .eq('id', id)
             .single();
 
-        if (!existing || existing.usuario_id !== req.usuario.id) {
+        if (!existing) {
             return res.status(404).json({ error: 'Transação não encontrada' });
         }
 
@@ -198,14 +213,14 @@ app.patch('/api/transactions/:id/pago', verificarToken, async (req, res) => {
         const { id } = req.params;
         const { pago } = req.body;
 
-        // Verificar se a transação pertence ao usuário
+        // Verificar se a transação existe
         const { data: existing } = await supabase
             .from('transacoes')
-            .select('usuario_id')
+            .select('id')
             .eq('id', id)
             .single();
 
-        if (!existing || existing.usuario_id !== req.usuario.id) {
+        if (!existing) {
             return res.status(404).json({ error: 'Transação não encontrada' });
         }
 
@@ -231,13 +246,13 @@ app.patch('/api/transactions/:id/pago', verificarToken, async (req, res) => {
     }
 });
 
-// POST - Limpar todas as transações do usuário
+// POST - Limpar todas as transações
 app.post('/api/transactions/clear/all', verificarToken, async (req, res) => {
     try {
         const { error } = await supabase
             .from('transacoes')
             .delete()
-            .eq('usuario_id', req.usuario.id);
+            .neq('id', '');
 
         if (error) {
             console.error('Erro ao limpar transações:', error);
@@ -274,13 +289,12 @@ app.post('/api/import-json', verificarToken, async (req, res) => {
 
                 await supabase.from('transacoes').insert({
                     id,
-                    DATA: trans.DATA,
-                    DESCRIÇÃO: (trans.DESCRIÇÃO || '').trim(),
-                    VALOR: parseFloat(trans.VALOR),
-                    CATEGORIA: (trans.CATEGORIA || 'Sem categoria').trim(),
+                    data: trans.DATA,
+                    descricao: (trans.DESCRIÇÃO || '').trim(),
+                    valor: parseFloat(trans.VALOR),
+                    categoria: (trans.CATEGORIA || 'Sem categoria').trim(),
                     pago: trans.pago ? 1 : 0,
                     data_referencia: trans.data_referencia || trans.DATA,
-                    usuario_id: req.usuario.id,
                     criado_em: new Date().toISOString(),
                     atualizado_em: new Date().toISOString()
                 });
