@@ -39,9 +39,6 @@ function getAuthHeaders(extra = {}) {
 function handleUnauthorized() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
-    if (typeof mostrarTelaLoginModal === 'function') {
-        mostrarTelaLoginModal();
-    }
 }
 
 // Fazer requisição GET
