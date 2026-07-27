@@ -67,8 +67,8 @@ function mapearTransacao(t) {
     };
 }
 
-// GET - Listar todas as transações
-app.get('/api/transactions', verificarToken, async (req, res) => {
+// GET - Listar todas as transações (público)
+app.get('/api/transactions', async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('transacoes')
