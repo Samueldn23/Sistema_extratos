@@ -172,6 +172,47 @@ async function updatePaymentStatus(id, isPaid) {
     return apiPatch(`/transactions/${id}/pago`, { pago: isPaid });
 }
 
+// Marcar todas as receitas pendentes como pagas
+async function markAllReceiptsAsPaid() {
+    const pendingReceipts = allTransactions.filter(transaction => {
+        const value = parseFloat(transaction['VALOR']);
+        return value > 0 && !transaction.pago;
+    });
+
+    if (pendingReceipts.length === 0) {
+        showNotification('✓ Nenhuma receita pendente para marcar.', 'info', 2000);
+        return;
+    }
+
+    const confirmed = confirm(`Marcar ${pendingReceipts.length} receita${pendingReceipts.length > 1 ? 's' : ''} como paga${pendingReceipts.length > 1 ? 's' : ''}?`);
+    if (!confirmed) return;
+
+    let updatedCount = 0;
+    let failedCount = 0;
+
+    for (const transaction of pendingReceipts) {
+        try {
+            const result = await updatePaymentStatus(transaction.id, true);
+            const index = allTransactions.findIndex(t => t.id === transaction.id);
+            if (index !== -1) {
+                allTransactions[index].pago = result.pago ?? true;
+            }
+            updatedCount++;
+        } catch (error) {
+            console.error('Erro ao marcar receita como paga:', transaction.id, error);
+            failedCount++;
+        }
+    }
+
+    displayTransactions();
+
+    if (failedCount > 0) {
+        showNotification(`✓ ${updatedCount} receitas marcadas como pagas. ${failedCount} falharam.`, 'error', 3000);
+    } else {
+        showNotification(`✓ ${updatedCount} receitas marcadas como pagas!`, 'success', 2000);
+    }
+}
+
 // Limpar todas as transações
 async function clearAllTransactions() {
     return apiPost('/transactions/clear/all', {});
@@ -543,8 +584,12 @@ function applyFilters(transactions) {
             if (filters.type === 'despesa' && valor >= 0) return false;
         }
 
-        // Filtro por Status (Pago/Pendente)
+        // Filtro por Status (Pago/Pendente) — aplicado apenas a despesas
         if (filters.status !== 'todos') {
+            const valor = parseFloat(t['VALOR']);
+            const isPositive = valor > 0;
+
+            if (isPositive) return false;
             if (filters.status === 'pago' && !t.pago) return false;
             if (filters.status === 'pendente' && t.pago) return false;
         }
@@ -1502,17 +1547,20 @@ function updateTableAuthStatus() {
     const table = document.querySelector('.transactions-table');
     const dataDropdown = document.getElementById('data-dropdown');
     const btnAddModal = document.getElementById('btn-add-modal');
+    const btnMarkReceiptsPaid = document.getElementById('btn-mark-receipts-paid');
 
     if (estaoAutenticado()) {
         // Usuário autenticado - mostrar elementos protegidos
         if (table) table.classList.remove('not-authenticated');
         if (dataDropdown) dataDropdown.classList.remove('not-authenticated');
         if (btnAddModal) btnAddModal.classList.remove('not-authenticated');
+        if (btnMarkReceiptsPaid) btnMarkReceiptsPaid.classList.remove('not-authenticated');
     } else {
         // Usuário não autenticado - ocultar elementos protegidos
         if (table) table.classList.add('not-authenticated');
         if (dataDropdown) dataDropdown.classList.add('not-authenticated');
         if (btnAddModal) btnAddModal.classList.add('not-authenticated');
+        if (btnMarkReceiptsPaid) btnMarkReceiptsPaid.classList.add('not-authenticated');
     }
 }
 
@@ -1748,6 +1796,11 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', executeSearch);
     searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') executeSearch(); });
     document.getElementById('btn-clear-search').addEventListener('click', clearSearch);
+
+    // Ação para marcar receitas pendentes como pagas
+    document.getElementById('btn-mark-receipts-paid').addEventListener('click', () => {
+        markAllReceiptsAsPaid();
+    });
 
     // File Operations
     document.getElementById('btn-import-json').addEventListener('click', () => {

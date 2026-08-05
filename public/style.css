@@ -1658,6 +1658,11 @@ body {
     display: none;
 }
 
+/* Ocultar botão de receitas quando usuário não autenticado */
+#btn-mark-receipts-paid.not-authenticated {
+    display: none;
+}
+
 /* Transição suave ao mostrar/ocultar */
 .transactions-table th,
 .transactions-table td {
