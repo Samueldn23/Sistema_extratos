@@ -1,78 +1,40 @@
-# 🔐 Sistema de Autenticação - Extratos Bancários
+# Autenticação
 
-## 📋 Resumo das Mudanças
+## Visão geral
 
-Você agora tem um **sistema completo de autenticação** no seu aplicativo de extratos!
+O projeto usa autenticação própria baseada em JWT, com usuários persistidos no Supabase. O frontend roda a partir da pasta [public](../public), e a API atual fica em [api/index.js](../api/index.js) e [api/auth.js](../api/auth.js).
 
-### ✨ O que foi implementado:
-
-1. **Tabela de Usuários** no banco de dados SQLite
-2. **Sistema de Registro** - Novos usuários podem se registrar
-3. **Sistema de Login** - Usuários autenticados com tokens JWT (24 horas)
-4. **Proteção de Dados** - Apenas usuários logados podem:
-   - Criar transações ✅
-   - Editar transações ✅
-   - Deletar transações ✅
-   - Marcar como pago ✅
-   - Importar/exportar dados ✅
-
-5. **Visualização Pública** - Qualquer um pode ver as transações (pode ser alterado)
-6. **Botão de Logout** - Interface intuitiva com nome do usuário
-
----
-
-## 🚀 Como Usar
-
-### 1️⃣ Iniciar o Servidor
+## Execução local
 
 ```bash
+npm install
 npm start
-# ou
-node src/servidor.js
 ```
 
-O servidor iniciará em `http://localhost:3000`
+O `npm start` sobe [api/dev-local.js](../api/dev-local.js), que:
 
-### 2️⃣ Acessar a Aplicação
+1. carrega o arquivo [.env](../.env)
+2. expõe a API em `/api`
+3. serve os arquivos estáticos de [public](../public)
 
-Abra `http://localhost:3000` no seu navegador.
+## Variáveis de ambiente
 
-### 3️⃣ Criar uma Conta
+As variáveis mínimas para o fluxo local são:
 
-- Clique na aba **"Registrar"**
-- Preencha: Nome, Email e Senha (mínimo 6 caracteres)
-- Clique em **"Criar Conta"**
-- Você será automaticamente autenticado
+```env
+SUPABASE_URL=...
+SUPABASE_ANON_KEY=...
+JWT_SECRET=...
+```
 
-### 4️⃣ Fazer Login
-
-- Clique na aba **"Login"**
-- Digite seu Email e Senha
-- Clique em **"Entrar"**
-
-### 5️⃣ Usar a Aplicação
-
-- Agora você pode criar, editar e deletar suas transações
-- Seu nome aparecerá no canto superior direito
-- Clique em qualquer lugar para ver mais opções de logout
-
----
-
-## 🧪 Dados de Teste
-
-Após criar sua primeira conta, você pode usar:
-
-- **Email**: teste@exemplo.com
-- **Senha**: senha123
-
----
-
-## 🔑 Features de Autenticação
+## Endpoints de autenticação
 
 ### Registro
 
-```
+```http
 POST /api/auth/registro
+Content-Type: application/json
+
 {
   "email": "usuario@email.com",
   "nome": "Seu Nome",
@@ -82,152 +44,52 @@ POST /api/auth/registro
 
 ### Login
 
-```
+```http
 POST /api/auth/login
+Content-Type: application/json
+
 {
   "email": "usuario@email.com",
   "senha": "senha123"
 }
 ```
 
-### Verificar Status (com token)
+### Sessão atual
 
-```
+```http
 GET /api/auth/me
-Headers: Authorization: Bearer {token}
+Authorization: Bearer {token}
 ```
 
 ### Logout
 
-```
+```http
 POST /api/auth/logout
-Headers: Authorization: Bearer {token}
+Authorization: Bearer {token}
 ```
 
----
+## Regras atuais de acesso
 
-## 🛡️ Segurança
+1. `GET /api/transactions` é público.
+2. Escrita em transações exige token válido.
+3. Registro, login e logout usam rotas separadas em `/api/auth`.
 
-- ✅ Senhas são **hasheadas com bcryptjs**
-- ✅ Tokens JWT com **expiração de 24 horas**
-- ✅ Cada usuário vê apenas **suas próprias transações**
-- ✅ Operações de escrita requerem **autenticação válida**
-- ✅ Tokens armazenados no **localStorage** (pode ser melhorado para httpOnly cookies)
+## Observações de segurança
 
----
+1. O token fica no localStorage do navegador.
+2. O `JWT_SECRET` deve ser definido explicitamente fora de desenvolvimento.
+3. A chave `SUPABASE_ANON_KEY` é usada pelo servidor atual; não coloque chave service role no frontend.
 
-## 📊 Estrutura de Dados
+## Troubleshooting
 
-### Tabela: `usuarios`
+### Erro 401
 
-```sql
-CREATE TABLE usuarios (
-    id TEXT PRIMARY KEY,
-    email TEXT UNIQUE NOT NULL,
-    nome TEXT NOT NULL,
-    senha_hash TEXT NOT NULL,
-    criado_em TEXT DEFAULT CURRENT_TIMESTAMP,
-    ultimo_login TEXT
-)
-```
+Refaça o login. Se necessário, limpe o localStorage e recarregue a página.
 
-### Tabela: `transacoes` (atualizada)
+### Erro de ambiente
 
-```sql
-CREATE TABLE transacoes (
-    id TEXT PRIMARY KEY,
-    DATA TEXT NOT NULL,
-    DESCRIÇÃO TEXT NOT NULL,
-    VALOR REAL NOT NULL,
-    CATEGORIA TEXT NOT NULL,
-    pago INTEGER DEFAULT 0,
-    usuario_id TEXT NOT NULL,  -- ← Novo: vinculado ao usuário
-    criado_em TEXT DEFAULT CURRENT_TIMESTAMP,
-    atualizado_em TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
-)
-```
+Confirme se [.env](../.env) está presente e contém as variáveis exigidas.
 
----
+### Porta ocupada
 
-## 🔄 Fluxo de Autenticação
-
-```
-1. Usuário acessa http://localhost:3000
-   ↓
-2. localStorage verificado
-   ├── Token válido? → Carrega app normalmente
-   └── Token inválido? → Mostra tela de login
-
-3. Usuário faz Login/Registro
-   ↓
-4. Servidor valida e retorna token JWT
-   ↓
-5. Token armazenado em localStorage
-   ↓
-6. Token enviado em todas as requisições de escrita
-   ↓
-7. Servidor valida token e verifica permissões
-```
-
----
-
-## 🚨 Possíveis Melhorias Futuras
-
-- [ ] Recuperação de senha por email
-- [ ] Autenticação de dois fatores (2FA)
-- [ ] Compartilhamento de transações entre usuários
-- [ ] Controle de papéis (Admin, User)
-- [ ] Webhooks para sincronização
-- [ ] Tokens refresh automáticos
-- [ ] Auditoria completa de ações
-- [ ] Backup automático por usuário
-
----
-
-## ⚠️ Notas Importantes
-
-1. **JWT Secret**: No arquivo `src/middlewares/autenticacao.js`, há uma chave padrão. **Mude em produção!**
-
-   ```javascript
-   const JWT_SECRET =
-     process.env.JWT_SECRET || "seu_segredo_super_secreto_2026";
-   ```
-
-2. **Banco de Dados**: Cada usuário vê apenas suas transações. Transações antigas sem `usuario_id` serão inacessíveis após a atualização.
-
-3. **CORS**: Está configurado para aceitar qualquer origem. Restrinja em produção.
-
----
-
-## 🐛 Troubleshooting
-
-### "Token não oferecido"
-
-- Verifique se você está logado
-- Limpe o localStorage: `localStorage.clear()`
-- Faça login novamente
-
-### "Email já registrado"
-
-- Use um email diferente ou faça login
-- Se esqueceu a senha, crie uma nova conta
-
-### Transações antigas não aparecem
-
-- Após a migração, transações antigas sem `usuario_id` não aparecem
-- Importe seus dados pelo sistema de importação
-
----
-
-## 📞 Suporte
-
-Se tiver dúvidas ou encontrar bugs, verifique:
-
-1. Console do navegador (F12) para erros de frontend
-2. Terminal do servidor para erros de backend
-3. Arquivos de log `banco/sistema_extratos.db` para problemas de BD
-
----
-
-**Desenvolvido em: 20 de Março de 2026**
+O launcher local tenta `3000` e, se necessário, cai para `3001`.

@@ -32,7 +32,7 @@ npm --version
 
 echo.
 echo [*] Instalando dependências...
-call npm install
+call npm install --ignore-scripts
 
 echo.
 echo ================================================
@@ -40,6 +40,6 @@ echo  Iniciando servidor...
 echo ================================================
 echo.
 
-npm start
+call npm run local:dev
 
 pause

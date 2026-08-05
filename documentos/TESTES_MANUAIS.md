@@ -1,282 +1,93 @@
-# 🧪 Como Testar o Sistema de Autenticação
+# Testes Manuais
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
-- Node.js instalado
-- npm instalado
-- Porta 3000 disponível (ou altere conforme necessário)
+1. Node.js instalado.
+2. Arquivo [.env](../.env) configurado.
+3. Dependências instaladas com `npm install`.
 
----
-
-## 🚀 Teste Completo Passo a Passo
-
-### 1️⃣ Instalar Dependências
-
-```bash
-cd c:\Users\Samuel Neves\.openclaw\workspace\Sistema_extratos
-npm install
-```
-
-**✓ Esperado**: Pacotes bcryptjs e jsonwebtoken instalados
-
----
-
-### 2️⃣ Iniciar o Servidor
+## Subida local
 
 ```bash
 npm start
 ```
 
-**✓ Esperado**: Saída similar a:
+Resultado esperado:
 
-```
-╔════════════════════════════════════════╗
-║   EXTRATO BANCÁRIO - SISTEMA LOCAL    ║
-║        Rodando com SQLite 3           ║
-║          Versão 2.0.0                 ║
-╚════════════════════════════════════════╝
+1. A aplicação sobe em http://localhost:3000.
+2. Se 3000 estiver ocupada, sobe em http://localhost:3001.
+3. O endpoint `/api/status` responde JSON com `banco_de_dados: "supabase"`.
 
-✓ Servidor rodando em: http://localhost:3000
-✓ Banco de dados: banco/sistema_extratos.db
-✓ Endpoints disponíveis: ...
-```
+## Teste de interface
 
----
+1. Abrir a aplicação no navegador.
+2. Validar carregamento da tela de login ou da lista de transações.
+3. Registrar um usuário novo.
+4. Fazer logout.
+5. Fazer login com o mesmo usuário.
 
-### 3️⃣ Acessar a Aplicação
+## Teste de operações protegidas
 
-Abra seu navegador em: `http://localhost:3000`
+Depois do login:
 
-**✓ Esperado**:
+1. Criar uma transação.
+2. Editar a transação criada.
+3. Marcar como paga ou pendente.
+4. Excluir a transação.
+5. Importar um JSON válido.
 
-- Tela de login/registro aparece (não tem token)
-- Dois abas: "Login" e "Registrar"
-- Campos de entrada funcionam
+## Teste de proteção sem token
 
----
-
-### 4️⃣ Testar Registro
-
-📝 **Preencher formulário de registro:**
-
-- Nome: `João Silva`
-- Email: `joao@teste.com`
-- Senha: `senha123456`
-- Confirmar: `senha123456`
-
-🔘 **Clicar: "Criar Conta"**
-
-**✓ Esperado**:
-
-- Mensagem de sucesso
-- Página recarrega
-- App carrega normalmente (AGORA ELA VÊ A APLICAÇÃO)
-
----
-
-### 5️⃣ Testar Criar Transação
-
-🆕 **Após estar logado:**
-
-1. Clique em **"➕ Nova"** ou **"Nova Transação"**
-2. Preencha:
-   - Data: `2026-03-20`
-   - Descrição: `Teste de Autenticação`
-   - Valor: `150.00`
-   - Categoria: `Teste`
-3. Clique em **"Salvar"**
-
-**✓ Esperado**:
-
-- Transação aparece na lista
-- Sem erros de autenticação
-- Transação salva no banco
-
----
-
-### 6️⃣ Testar Edição
-
-✏️ **Clique no ✏️ de uma transação:**
-
-1. Altere a descrição para: `Teste Editado`
-2. Clique em **"Salvar Alterações"**
-
-**✓ Esperado**:
-
-- Transação atualizada inmediatamente
-- Descrição reflete a mudança
-
----
-
-### 7️⃣ Testar Logout
-
-👤 **Clique no seu nome no canto superior direito**
-
-**✓ Esperado**:
-
-- Diálogo de confirmação aparece
-- Você é logado
-- Página volta para tela de login
-
----
-
-### 8️⃣ Testar Login com Conta Existente
-
-🔑 **Na tela de login:**
-
-1. Email: `joao@teste.com`
-2. Senha: `senha123456`
-3. Clique em **"Entrar"**
-
-**✓ Esperado**:
-
-- Login bem-sucedido
-- Suas transações anteriores aparecem
-- Você está autenticado
-
----
-
-### 9️⃣ Testar Proteção (parte importante!)
-
-🔒 **Todos esses testes verificam que SEM LOGIN não funciona:**
-
-#### Teste A: Abrir console (F12) e limpar localStorage
+No console do navegador:
 
 ```javascript
 localStorage.clear();
 ```
 
-Depois recarregue a página (F5)
+Depois recarregue a página e tente uma operação de escrita. O esperado é receber erro de autenticação.
 
-**✓ Esperado**:
+## Teste rápido por API
 
-- Volta para tela de login
-- Não consegue acessar a app
-
-#### Teste B: Tentar criar transação sem token (avançado)
-
-```javascript
-// No console (F12):
-fetch("http://localhost:3000/api/transactions", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    id: "teste",
-    DATA: "2026-03-20",
-    DESCRIÇÃO: "Sem Token",
-    VALOR: 100,
-    CATEGORIA: "Teste",
-  }),
-})
-  .then((r) => r.json())
-  .then(console.log);
-```
-
-**✓ Esperado**:
-
-- Resposta: `{"error":"Não autenticado"}`
-- NÃO deve criar a transação
-
----
-
-### 🔟 Testar com Outro Usuário
-
-👥 **Registre uma segunda conta:**
-
-1. Logout (clique no nome)
-2. Crie outra conta: `maria@teste.com` / `senha456789`
-3. Crie uma transação como Maria
-
-**✓ Esperado**:
-
-- Apenas as transações de Maria aparecem
-- As transações de João NÃO aparecem
-- Dados isolados por usuário
-
----
-
-### 1️⃣1️⃣ Testar Importação de Dados
-
-📂 **Teste proteção de importação:**
-
-1. Logout
-2. Limpe localStorage: `localStorage.clear()`
-3. Tente acessar: `http://localhost:3000/api/import-json`
-
-**✓ Esperado**:
-
-- Erro ou recusa de acesso
-- Necessário token de autenticação
-
----
-
-### 1️⃣2️⃣ Verificar Banco de Dados
-
-💾 **Abra o banco SQLite:**
+### Status
 
 ```bash
-# Windows - usando sqlite3 CLI (se instalado)
-cd banco
-sqlite3 sistema_extratos.db
-
-# Dentro do sqlite3:
-> SELECT * FROM usuarios;
-> SELECT * FROM transacoes;
+curl -s http://localhost:3000/api/status
 ```
 
-**✓ Esperado**:
-
-- Tabela `usuarios` com seus usuários
-- Tabela `transacoes` com campo `usuario_id` preenchido
-- Senhas hasheadas (não em texto plano)
-
----
-
-## 📊 Checklist de Testes
-
-- [ ] Servidor inicia sem erros
-- [ ] Registro funciona
-- [ ] Login funciona
-- [ ] Criar transação funciona (logado)
-- [ ] Editar transação funciona
-- [ ] Logout funciona
-- [ ] Sem token não consegue criar transação
-- [ ] Dados isolados por usuário
-- [ ] Banco de dados tem estrutura correta
-- [ ] LocalStorage armazena token
-- [ ] Sessão expira após 24h (ou pode testar reduzindo tempo)
-
----
-
-## 🐛 Troubleshooting
-
-### Erro: "address already in use :::3000"
+### Registro
 
 ```bash
-# Mude a porta no src/servidor.js:
-const PORT = 3000;
+curl -X POST http://localhost:3000/api/auth/registro \
+  -H "Content-Type: application/json" \
+  -d '{"email":"teste@exemplo.com","nome":"Teste","senha":"senha123"}'
 ```
 
-### Erro: "Cannot find module 'bcryptjs'"
+### Login
 
 ```bash
-npm install bcryptjs jsonwebtoken
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"teste@exemplo.com","senha":"senha123"}'
 ```
 
-### Erro no console do navegador: "API_URL is not defined"
+## Checklist
 
-- Certifique-se de que `script.js` está carregando antes
-- Verifique ordem de scripts no `index.html`
+1. A aplicação sobe sem erro.
+2. Registro funciona.
+3. Login funciona.
+4. Operações de escrita exigem token.
+5. A listagem pública funciona.
+6. O status da API responde corretamente.
 
-### Token expirado mesmo com 24h
+## Troubleshooting
 
-- Cheque a data/hora do sistema
-- Recarregue a página
-- Limpe localStorage e faça login novamente
+### Porta já em uso
 
----
+O launcher local troca automaticamente para 3001.
 
-## 🎯 Resultados Esperados Finais
+### Erro de ambiente
+
+Confirme as variáveis `SUPABASE_URL`, `SUPABASE_ANON_KEY` e `JWT_SECRET`.
 
 ✅ Sistema totalmente funcional com:
 

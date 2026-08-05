@@ -28,7 +28,6 @@ Thumbs.db
 # Scripts do Windows
 start.bat
 start.ps1
-iniciar-servidor.bat
 railway.toml
 
 # Documentação

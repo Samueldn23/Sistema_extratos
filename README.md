@@ -2,10 +2,10 @@
 
 ## 📋 Visão Geral
 
-Sistema web de gestão de extratos bancários com interface responsiva, construído com Node.js/Express no backend e JavaScript vanilla no frontend, usando SQLite3 como banco de dados.
+Sistema web de gestão de extratos bancários com interface responsiva, construído com Node.js/Express no backend e JavaScript vanilla no frontend, usando Supabase no fluxo atual da aplicação.
 
-**Versão:** 2.0.0
-**Banco de Dados:** SQLite 3 (local)
+**Versão:** 3.0.0
+**Banco de Dados:** Supabase
 **Status:** ✅ Em Operação
 
 ---
@@ -52,7 +52,7 @@ Sistema web de gestão de extratos bancários com interface responsiva, constru�
 
 - **Node.js** - Runtime JavaScript
 - **Express.js** - Framework web
-- **SQLite3** - Banco de dados local
+- **Supabase** - Banco de dados e API
 - **CORS** - Suporte a requisições cross-origin
 
 ### Frontend
@@ -68,16 +68,17 @@ Sistema web de gestão de extratos bancários com interface responsiva, constru�
 
 ```
 sistema-extratos/
-├── server.js                    # Servidor Express
-├── script.js                    # Lógica do frontend
-├── index.html                   # Estrutura HTML
-├── style.css                    # Estilos CSS
-├── dados.json                   # Dados de exemplo
+├── api/index.js                 # API principal usada no Vercel
+├── api/auth.js                  # Rotas de autenticação
+├── api/dev-local.js             # Launcher local de desenvolvimento
+├── public/index.html            # Estrutura HTML
+├── public/script.js             # Lógica do frontend
+├── public/style.css             # Estilos CSS
 ├── package.json                 # Dependências
-├── .env                         # Configurações
-├── sistema_extratos.db          # Banco SQLite (criado automaticamente)
-├── start.bat                    # Script Windows
-├── start.ps1                    # Script PowerShell
+├── .env                         # Configurações locais
+├── start.bat                    # Script local para Windows CMD
+├── start.ps1                    # Script local para PowerShell
+├── start.sh                     # Script local para Linux/Fedora
 └── README.md                    # Esta documentação
 ```
 
@@ -95,16 +96,26 @@ start.bat
 .\start.ps1
 ```
 
-### Opção 2: Manual
+Os scripts locais iniciam a aplicação em modo desenvolvimento usando a API de [api/index.js](api/index.js) e os arquivos estáticos da pasta [public](public), sem alterar a configuração do Vercel.
+
+### Opção 2: Linux (Fedora 44 - Automático)
+
+```bash
+# Dar permissão de execução (apenas na primeira vez)
+chmod +x start.sh
+
+# Executar
+./start.sh
+```
+
+### Opção 3: Manual
 
 ```bash
 # 1. Instalar dependências
 npm install
 
-# 2. Iniciar servidor
-npm start
-# ou
-node server.js
+# 2. Iniciar ambiente local
+npm run local:dev
 ```
 
 ### 3. Acessar a Aplicação
@@ -114,6 +125,8 @@ Abra no navegador:
 ```
 http://localhost:3000
 ```
+
+Se a porta 3000 já estiver ocupada, o launcher local tenta automaticamente a porta 3001.
 
 ---
 
@@ -136,6 +149,8 @@ http://localhost:3000
 ---
 
 ## 📊 Estrutura do Banco de Dados
+
+O projeto em uso atualmente persiste os dados no Supabase. A estrutura exata das tabelas depende do schema configurado no seu projeto Supabase.
 
 ### Tabela: transacoes
 

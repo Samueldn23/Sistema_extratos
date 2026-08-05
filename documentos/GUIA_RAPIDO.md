@@ -1,128 +1,64 @@
-# ⚡ Guia Rápido - Sistema de Autenticação
+# Guia Rápido
 
-## 🚀 Iniciar em 3 passos
+## Iniciar localmente
 
-### Passo 1: Instalar dependências
+### 1. Instale as dependências
 
 ```bash
 npm install
 ```
 
-### Passo 2: Iniciar o servidor
+### 2. Inicie a aplicação
 
 ```bash
 npm start
-# Ou: node src/servidor.js
 ```
 
-### Passo 3: Acessar a aplicação
+O start local sobe o launcher [api/dev-local.js](../api/dev-local.js), que serve a pasta [public](../public) e a API atual em [api/index.js](../api/index.js).
 
-Abra seu navegador em: **http://localhost:3000**
+### 3. Abra no navegador
 
----
+Use http://localhost:3000
 
-## 👤 Primeira Vez? Registre-se!
+Se a porta 3000 estiver ocupada, o launcher tenta automaticamente a 3001.
 
-1. Clique na aba **"Registrar"**
-2. Preencha:
-   - **Nome**: Seu nome completo
-   - **Email**: seu@email.com
-   - **Senha**: Mínimo 6 caracteres
-3. Clique em **"Criar Conta"**
-4. Pronto! Você está logado 🎉
+## Fluxo de uso
 
----
+1. Abra a tela de login ou registro.
+2. Crie uma conta ou entre com uma conta existente.
+3. Gerencie transações normalmente pela interface.
+4. Use os botões de importação, exportação, edição e exclusão conforme necessário.
 
-## 🔑 Já tem conta? Faça Login
+## O que funciona sem login
 
-1. Clique na aba **"Login"** (já é a padrão)
-2. Preencha:
-   - **Email**: seu@email.com
-   - **Senha**: Sua senha
-3. Clique em **"Entrar"**
-4. Prontinho! 🎊
+1. Visualização de transações.
+2. Consulta de status da API.
 
----
+## O que exige login
 
-## 📝 Agora você pode:
+1. Criar transações.
+2. Editar transações.
+3. Excluir transações.
+4. Marcar pagamento.
+5. Importar dados.
+6. Limpar dados.
 
-✅ **Criar transações** - Clique em "➕ Nova"
-✅ **Editar transações** - Clique no ✏️ da transação
-✅ **Deletar transações** - Clique na 🗑️
-✅ **Marcar como pago** - Clique no valor
-✅ **Importar dados** - Clique em "📂 Dados" → "⬆️ Importar JSON"
-✅ **Exportar dados** - Clique em "📂 Dados" → "💾 Exportar DB"
+## Problemas comuns
 
----
+### Erro de autenticação
 
-## 🚪 Para Sair (Logout)
+Faça login novamente. Se necessário, limpe o localStorage com `localStorage.clear()` e recarregue a página.
 
-Clique no seu **nome no canto superior direito** com o ícone 👤
+### Porta em uso
 
-- Confirme que deseja sair
-- Você será redirecionado para a tela de login
+O launcher local muda para 3001 automaticamente. Se quiser forçar outra porta, defina a variável `PORT` antes de iniciar.
 
----
+### Erro de ambiente
 
-## 🔒 Segurança
+Verifique se o arquivo [.env](../.env) contém `SUPABASE_URL`, `SUPABASE_ANON_KEY` e, quando necessário, `JWT_SECRET`.
 
-Lembre-se:
+## Referências
 
-- ✅ Use uma **senha forte** (mínimo 6 caracteres)
-- ✅ **Não compartilhe** sua senha
-- ✅ **Logout** ao usar em computadores públicos
-- ⚠️ Seus dados são **únicos para você** - ninguém mais vê
-
----
-
-## 🆘 Esqueceu a Senha?
-
-Sinta-se à vontade para **criar uma nova conta** com um email diferente.
-Suas transações antigas ficarão lá (vinculadas ao email anterior).
-
----
-
-## 💡 Dicas
-
-- Seus dados são salvos **automaticamente** no servidor
-- Você pode usar a app de **qualquer dispositivo/navegador** com seu email
-- Abra **console** (F12) para ver logs detalhados
-- Limpe o **localStorage** se tiver problemas: `localStorage.clear()`
-
----
-
-## 🐛 Problemas?
-
-### Erro: "Não autenticado"
-
-→ Faça login novamente
-
-### Erro: "Email já registrado"
-
-→ Use outro email ou faça login
-
-### Transações antigas não aparecem
-
-→ Importe-as usando o sistema de importação
-
-### Porta 3000 em uso?
-
-→ Altere em `src/servidor.js` linha 10:
-
-```javascript
-const PORT = 3000; // Troque de porta
-```
-
----
-
-## 📞 Mais Informações
-
-Leia os arquivos:
-
-- 📖 `AUTENTICACAO.md` - Documentação completa
-- 📊 `SUMARIO_AUTENTICACAO.md` - Resumo técnico
-- 🧪 `testes/teste-autenticacao.sh` - Testes automatizados
-
----
-
-**Bom uso! 🚀**
+1. [AUTENTICACAO.md](AUTENTICACAO.md)
+2. [SUMARIO_AUTENTICACAO.md](SUMARIO_AUTENTICACAO.md)
+3. [TESTES_MANUAIS.md](TESTES_MANUAIS.md)

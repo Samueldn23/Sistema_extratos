@@ -264,9 +264,9 @@
 - `express@^4.18.2` - Framework web
 - `cors@^2.8.5` - Cors middleware
 - `body-parser@^1.20.2` - Parse JSON
-- `sqlite3@^5.1.7` - Banco de dados
-- `bcryptjs@^2.4.3` - Hash de senhas ⭐
-- `jsonwebtoken@^9.0.2` - JWT ⭐
+- `@supabase/supabase-js` - Banco de dados e acesso ao Supabase
+- `bcryptjs@^2.4.3` - Hash de senhas
+- `jsonwebtoken@^9.0.2` - JWT
 
 ### Desenvolvimento
 

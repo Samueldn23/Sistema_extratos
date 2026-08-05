@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "node src/servidor.js"
+startCommand = "node api/dev-local.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 

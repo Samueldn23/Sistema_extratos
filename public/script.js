@@ -526,7 +526,7 @@ async function loadTransactions() {
         displayTransactions();
     } catch (error) {
         console.error('Erro ao carregar transações:', error);
-        showNotification('❌ Erro ao conectar ao servidor. Certifique-se de que o servidor está rodando em http://localhost:3000', 'error', 0);
+        showNotification('❌ Erro ao conectar ao servidor local. Verifique se a aplicação foi iniciada pelos scripts de desenvolvimento.', 'error', 0);
     }
 }
 
@@ -1694,12 +1694,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btn-clear-database').addEventListener('click', clearAllDatabase);
     document.getElementById('btn-toggle-theme').addEventListener('click', toggleTheme);
-    
+
     // Toggle para mostrar/ocultar filtros
     document.getElementById('btn-toggle-filters').addEventListener('click', () => {
         const filtersSection = document.getElementById('filters-section');
         const btn = document.getElementById('btn-toggle-filters');
-        
+
         if (filtersSection.style.display === 'none') {
             filtersSection.style.display = 'block';
             btn.textContent = '🔼';
@@ -1710,9 +1710,10 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('filtersVisible', 'false');
         }
     });
-    
+
     // Restaurar estado dos filtros ao carregar
-    const filtersVisible = localStorage.getItem('filtersVisible') !== 'false';
+    // Sem preferencia salva, a secao inicia oculta por padrao.
+    const filtersVisible = localStorage.getItem('filtersVisible') === 'true';
     if (filtersVisible) {
         document.getElementById('filters-section').style.display = 'block';
         document.getElementById('btn-toggle-filters').textContent = '🔼';

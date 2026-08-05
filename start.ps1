@@ -30,7 +30,7 @@ Write-Host "[✓] NPM detectado: v$npmVersion" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "[*] Instalando dependências..." -ForegroundColor Blue
-npm install
+npm install --ignore-scripts
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host ""
@@ -45,4 +45,4 @@ Write-Host "  Iniciando servidor..." -ForegroundColor Cyan
 Write-Host "════════════════════════════════════════════════" -ForegroundColor Cyan
 Write-Host ""
 
-npm start
+npm run local:dev
