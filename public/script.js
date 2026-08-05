@@ -1694,6 +1694,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btn-clear-database').addEventListener('click', clearAllDatabase);
     document.getElementById('btn-toggle-theme').addEventListener('click', toggleTheme);
+    
+    // Toggle para mostrar/ocultar filtros
+    document.getElementById('btn-toggle-filters').addEventListener('click', () => {
+        const filtersSection = document.getElementById('filters-section');
+        const btn = document.getElementById('btn-toggle-filters');
+        
+        if (filtersSection.style.display === 'none') {
+            filtersSection.style.display = 'block';
+            btn.textContent = '🔼';
+            localStorage.setItem('filtersVisible', 'true');
+        } else {
+            filtersSection.style.display = 'none';
+            btn.textContent = '🔽';
+            localStorage.setItem('filtersVisible', 'false');
+        }
+    });
+    
+    // Restaurar estado dos filtros ao carregar
+    const filtersVisible = localStorage.getItem('filtersVisible') !== 'false';
+    if (filtersVisible) {
+        document.getElementById('filters-section').style.display = 'block';
+        document.getElementById('btn-toggle-filters').textContent = '🔼';
+    }
 
     // ==================== Filter Event Listeners ====================
 
