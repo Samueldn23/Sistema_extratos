@@ -459,6 +459,7 @@ function updatePeriodDisplay() {
 
     document.getElementById('current-month').textContent = months[monthIndex];
     document.getElementById('current-year').textContent = year;
+    updatePeriodSelectionState();
 }
 
 // ==================== Limpar Banco de Dados ====================
@@ -659,6 +660,7 @@ function clearAllFilters() {
     document.getElementById('filter-date-end').value = '';
 
     document.getElementById('filters-section').classList.remove('has-active-filters');
+    updatePeriodSelectionState();
     displayTransactions();
 }
 
@@ -667,40 +669,112 @@ function updateFilterBadge() {
     section.classList.toggle('has-active-filters', hasActiveFilters());
 }
 
+function getTransactionDate(transaction) {
+    const dateToUse = transaction.data_referencia || transaction.DATA;
+    const date = new Date(dateToUse);
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function getActivePeriodRange() {
+    const hasCustomPeriod = Boolean(filters.dateStart || filters.dateEnd);
+
+    if (!hasCustomPeriod) {
+        return {
+            hasCustomPeriod: false,
+            start: null,
+            end: null
+        };
+    }
+
+    const start = filters.dateStart ? new Date(`${filters.dateStart}T00:00:00`) : null;
+    const end = filters.dateEnd ? new Date(`${filters.dateEnd}T23:59:59`) : null;
+
+    return {
+        hasCustomPeriod: true,
+        start,
+        end
+    };
+}
+
+function updatePeriodSelectionState() {
+    const { hasCustomPeriod } = getActivePeriodRange();
+    const toolbarNav = document.querySelector('.toolbar-nav');
+    const badge = document.getElementById('custom-period-badge');
+    const periodDisplay = document.getElementById('period-display');
+    const prevMonthButton = document.getElementById('prev-month');
+    const nextMonthButton = document.getElementById('next-month');
+    const monthPicker = document.getElementById('month-picker');
+
+    if (toolbarNav) {
+        toolbarNav.classList.toggle('period-locked', hasCustomPeriod);
+    }
+
+    if (badge) {
+        badge.style.display = hasCustomPeriod ? 'inline-flex' : 'none';
+    }
+
+    if (periodDisplay) {
+        periodDisplay.title = hasCustomPeriod
+            ? 'Período customizado ativo. Limpe o filtro de datas para usar a navegação mensal.'
+            : 'Clique para escolher o mês';
+    }
+
+    if (prevMonthButton) {
+        prevMonthButton.disabled = hasCustomPeriod;
+    }
+
+    if (nextMonthButton) {
+        nextMonthButton.disabled = hasCustomPeriod;
+    }
+
+    if (hasCustomPeriod && monthPicker) {
+        monthPicker.classList.remove('active');
+    }
+}
+
 // ==================== Display Transactions ====================
 
 function displayTransactions() {
     const tbody = document.getElementById('transactions-body');
     const noDataMsg = document.getElementById('no-data-message');
 
-    // Filtrar por período (mês/ano)
+    // Filtrar por período ativo. Se houver filtro de datas, ele substitui o mês selecionado.
     const monthIndex = currentDate.getMonth();
     const year = currentDate.getFullYear();
+    const { hasCustomPeriod, start, end } = getActivePeriodRange();
 
     let filtered = allTransactions.filter(t => {
-        // Usar data_referencia se existir, senão usar DATA
-        const dateToUse = t.data_referencia || t.DATA;
-        const date = new Date(dateToUse);
+        const date = getTransactionDate(t);
+        if (!date) return false;
+
+        if (hasCustomPeriod) {
+            if (start && date < start) return false;
+            if (end && date > end) return false;
+            return true;
+        }
+
         return date.getMonth() === monthIndex && date.getFullYear() === year;
     });
 
-    // Guardar as transações do mês atual para cálculo de totais (sem vencidas)
+    // Guardar as transações do período base para cálculo de totais (sem vencidas extras)
     const filteredForSummary = [...filtered];
 
-    // Adicionar despesas não pagas de períodos anteriores (vencidas) - apenas para exibição
-    const unpaidExpenses = allTransactions.filter(t => {
-        // Usar data_referencia se existir, senão usar DATA
-        const dateToUse = t.data_referencia || t.DATA;
-        const date = new Date(dateToUse);
-        const tMonth = date.getMonth();
-        const tYear = date.getFullYear();
-        const isExpense = parseFloat(t['VALOR']) < 0;
-        const isUnpaid = !t.pago; // Converter para booleano corretamente
-        const isVencida = (tYear < year) || (tYear === year && tMonth < monthIndex);
-        return isVencida && isExpense && isUnpaid;
-    });
+    // Despesas vencidas so entram no modo mensal padrao.
+    if (!hasCustomPeriod) {
+        const unpaidExpenses = allTransactions.filter(t => {
+            const date = getTransactionDate(t);
+            if (!date) return false;
 
-    filtered = [...filtered, ...unpaidExpenses];
+            const tMonth = date.getMonth();
+            const tYear = date.getFullYear();
+            const isExpense = parseFloat(t['VALOR']) < 0;
+            const isUnpaid = !t.pago;
+            const isVencida = (tYear < year) || (tYear === year && tMonth < monthIndex);
+            return isVencida && isExpense && isUnpaid;
+        });
+
+        filtered = [...filtered, ...unpaidExpenses];
+    }
 
     // Aplicar filtros adicionais
     filtered = applyFilters(filtered);
@@ -830,8 +904,8 @@ function updateSummary(transactions) {
         }
     });
 
-    // Calcular saldo anterior (saldo acumulado até o mês anterior)
-    const saldoAnterior = calculatePreviousMonthBalance();
+    // Calcular saldo anterior com base no período ativo.
+    const saldoAnterior = calculatePreviousBalance();
 
     // Saldo do mês atual
     const saldoMesAtual = totalReceitas - totalDespesas;
@@ -848,22 +922,28 @@ function updateSummary(transactions) {
     saldoElement.style.color = saldoTotal >= 0 ? '#0d9488' : '#dc2626';
 }
 
-// Calcular saldo acumulado dos meses anteriores
-function calculatePreviousMonthBalance() {
+// Calcular saldo acumulado antes do período ativo
+function calculatePreviousBalance() {
+    const { hasCustomPeriod, start } = getActivePeriodRange();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
 
     let saldoAnterior = 0;
 
     allTransactions.forEach(t => {
-        // Usar data_referencia se existir, caso contrário usar DATA
-        const dateToUse = t.data_referencia || t.DATA;
-        const datePart = dateToUse.split('T')[0]; // "2025-07-31"
-        const [transYear, transMonth] = datePart.split('-').map(Number);
+        const date = getTransactionDate(t);
+        if (!date) return;
 
-        // Verificar se é ANTES do mês/ano atual
-        const isBeforeCurrent = transYear < currentYear ||
-            (transYear === currentYear && (transMonth - 1) < currentMonth);
+        let isBeforeCurrent;
+
+        if (hasCustomPeriod && start) {
+            isBeforeCurrent = date < start;
+        } else if (hasCustomPeriod) {
+            isBeforeCurrent = false;
+        } else {
+            isBeforeCurrent = date.getFullYear() < currentYear ||
+                (date.getFullYear() === currentYear && date.getMonth() < currentMonth);
+        }
 
         if (isBeforeCurrent) {
             saldoAnterior += parseFloat(t['VALOR']);
@@ -1596,6 +1676,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('period-display').addEventListener('click', (e) => {
         e.stopPropagation();
+        if (getActivePeriodRange().hasCustomPeriod) {
+            return;
+        }
         const picker = document.getElementById('month-picker');
         if (picker.classList.contains('active')) {
             closeMonthPicker();
@@ -1765,10 +1848,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Filtro Período
     document.getElementById('filter-date-start').addEventListener('change', (e) => {
         filters.dateStart = e.target.value || null;
+        updatePeriodSelectionState();
         displayTransactions();
     });
     document.getElementById('filter-date-end').addEventListener('change', (e) => {
         filters.dateEnd = e.target.value || null;
+        updatePeriodSelectionState();
         displayTransactions();
     });
 
