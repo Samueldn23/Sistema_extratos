@@ -6,9 +6,13 @@
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
-    <title>Sistema de Extratos</title>
-    <link rel="stylesheet" href="style.css?v=4.0">
-    <script src="https://sql.js.org/dist/sql-wasm.js" type="application/javascript"></script>
+    <title>Extratos — Controle financeiro pessoal</title>
+    <meta name="description" content="Controle de gastos e receitas por mês, com controle de despesas pendentes e saldo acumulado.">
+    <meta name="theme-color" content="#0f766e">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Cpath d='M16 7v18M10 13.5h9a3 3 0 0 1 0 6h-6a3 3 0 0 0 0 6h9' stroke='%23fff' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.5.1/dist/fonts/geist-sans/style.css">
+    <link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body>
     <!-- Container de Autenticação -->
@@ -25,11 +29,10 @@
                 </div>
             </div>
             <div class="header-actions">
-                <button class="btn-icon" id="btn-toggle-theme" title="Alternar tema escuro/claro">🌙</button>
                 <button class="btn-icon" id="btn-toggle-filters" title="Mostrar/ocultar filtros">🔽</button>
                 <div class="column-filter-inline" id="column-filter-inline">
                     <button class="btn-icon" id="btn-filter-toggle-inline" title="Mostrar/ocultar elementos">⚙️</button>
-                    <div class="column-filter-popover" id="column-filter-popover" style="display: none;">
+                    <div class="column-filter-popover is-hidden" id="column-filter-popover">
                         <div class="filter-title">Visibilidade</div>
                         <label class="filter-checkbox">
                             <input type="checkbox" data-column="busca" checked> 🔍 Busca
@@ -71,7 +74,7 @@
                         <span class="period-year" id="current-year">2026</span>
                     </div>
                     <button class="btn-nav" id="next-month" title="Próximo mês">▶</button>
-                    <span class="custom-period-badge" id="custom-period-badge" style="display: none;">Período customizado ativo</span>
+                    <span class="custom-period-badge is-hidden" id="custom-period-badge">Período customizado ativo</span>
 
                     <!-- Month Picker Popup -->
                     <div class="month-picker" id="month-picker">
@@ -132,8 +135,8 @@
                             </button>
                         </div>
                     </div>
-                    <input type="file" id="json-file-input" accept=".json" style="display: none;">
-                    <input type="file" id="db-file-input" accept=".db" style="display: none;">
+                    <input type="file" class="is-hidden" id="json-file-input" accept=".json">
+                    <input type="file" class="is-hidden" id="db-file-input" accept=".db">
 
                     <!-- Aparência -->
                     <div class="toolbar-dropdown" id="appearance-dropdown">
@@ -141,6 +144,12 @@
                             <span>🎨</span> <span class="btn-label">Tema</span>
                         </button>
                         <div class="toolbar-dropdown-menu" id="appearance-dropdown-menu">
+                            <div class="dropdown-section-title">Modo</div>
+                            <select class="dropdown-select" id="mode-selector">
+                                <option value="light">Claro</option>
+                                <option value="dark">Escuro</option>
+                                <option value="system">Seguir o sistema</option>
+                            </select>
                             <div class="dropdown-section-title">Cores</div>
                             <select class="dropdown-select" id="theme-selector">
                                 <option value="default">🎨 Padrão</option>
@@ -174,12 +183,12 @@
                         placeholder="Pesquisar por data, descrição ou valor..."
                         autocomplete="off"
                     >
-                    <button class="btn-clear-search" id="btn-clear-search" style="display: none;">✕</button>
+                    <button class="btn-clear-search is-hidden" id="btn-clear-search">✕</button>
                 </div>
             </section>
 
             <!-- Barra de Filtros -->
-            <section class="filters-section" id="filters-section" style="display: none;">
+            <section class="filters-section is-hidden" id="filters-section">
                 <div class="filters-row">
                     <!-- Filtro Tipo -->
                     <div class="filter-group">
@@ -244,36 +253,39 @@
             </section>
 
             <!-- Painel de Filtro (oculto) -->
-            <section class="column-filter-panel" id="column-filter-panel" style="display: none;"></section>
+            <section class="column-filter-panel is-hidden" id="column-filter-panel"></section>
 
-            <!-- Summary Section -->
+            <!-- Summary Section: faixa única. O saldo total domina e os três
+                 componentes aparecem na mesma conta, que é a informação que
+                 realmente importa. Evita a fileira de 4 cards iguais. -->
             <section class="summary-section">
-                <div class="summary-card anterior">
-                    <div class="summary-icon">📊</div>
-                    <div class="summary-content">
-                        <h3>Saldo Anterior</h3>
-                        <p id="total-anterior">R$ 0,00</p>
+                <div class="summary-primary">
+                    <div class="summary-primary-label">Saldo total</div>
+                    <div class="summary-primary-value" id="total-saldo">R$ 0,00</div>
+                    <div class="summary-equation" aria-hidden="true">
+                        <span class="eq-term" id="eq-anterior">R$ 0,00</span>
+                        <span class="eq-term">anterior</span>
+                        <span class="eq-op">+</span>
+                        <span class="eq-term is-pos" id="eq-receitas">R$ 0,00</span>
+                        <span class="eq-term">receitas</span>
+                        <span class="eq-op">−</span>
+                        <span class="eq-term is-neg" id="eq-despesas">R$ 0,00</span>
+                        <span class="eq-term">despesas</span>
                     </div>
                 </div>
-                <div class="summary-card receita">
-                    <div class="summary-icon">📈</div>
-                    <div class="summary-content">
-                        <h3>Total de Receitas</h3>
-                        <p id="total-receitas">R$ 0,00</p>
+
+                <div class="summary-metrics">
+                    <div class="summary-metric">
+                        <span class="summary-metric-label">Saldo anterior</span>
+                        <span class="summary-metric-value" id="total-anterior">R$ 0,00</span>
                     </div>
-                </div>
-                <div class="summary-card despesa">
-                    <div class="summary-icon">📉</div>
-                    <div class="summary-content">
-                        <h3>Total de Despesas</h3>
-                        <p id="total-despesas">R$ 0,00</p>
+                    <div class="summary-metric is-pos">
+                        <span class="summary-metric-label">Receitas do período</span>
+                        <span class="summary-metric-value" id="total-receitas">R$ 0,00</span>
                     </div>
-                </div>
-                <div class="summary-card saldo">
-                    <div class="summary-icon">💵</div>
-                    <div class="summary-content">
-                        <h3>Saldo Total</h3>
-                        <p id="total-saldo">R$ 0,00</p>
+                    <div class="summary-metric is-neg">
+                        <span class="summary-metric-label">Despesas do período</span>
+                        <span class="summary-metric-value" id="total-despesas">R$ 0,00</span>
                     </div>
                 </div>
             </section>
@@ -281,7 +293,7 @@
             <!-- Transactions Table Section -->
             <section class="transactions-section">
                 <div class="section-header">
-                    <h2>📊 Transações</h2>
+                    <h2>Transações</h2>
                     <span class="transaction-count" id="transaction-count"></span>
                 </div>
                 <div id="table-section" class="table-container">
@@ -308,7 +320,7 @@
     <div id="addTransactionModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>➕ Nova Transação</h2>
+                <h3>➕ Nova Transação</h3>
                 <button class="close" id="closeModal" type="button">&times;</button>
             </div>
             <form id="transactionForm" class="transaction-form">
@@ -362,7 +374,7 @@
     <div id="editTransactionModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>✏️ Editar Transação</h2>
+                <h3>✏️ Editar Transação</h3>
                 <button class="close" id="closeEditModal" type="button">&times;</button>
             </div>
             <form id="editTransactionForm" class="transaction-form">
@@ -412,7 +424,9 @@
         </div>
     </div>
 
-    <script src="auth.js?v=1.0"></script>
-    <script src="script.js?v=4.1"></script>
+    <div id="toast-region" aria-live="polite" aria-atomic="false"></div>
+
+    <script src="auth.js?v=2.0"></script>
+    <script src="script.js?v=5.0"></script>
 </body>
 </html>

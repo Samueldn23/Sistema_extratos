@@ -5,21 +5,42 @@
 }
 
 :root {
-    --primary-color: #5b4fbf;
-    --secondary-color: #7f6fcb;
+    /* Accent único. Verde-petróleo dessaturado: evita o roxo/azul "AI default"
+       e fica na mesma família do --success-color, para que acento e semântica
+       não competam entre si. */
+    --primary-color: #0f766e;
+    --secondary-color: #115e59;
     --success-color: #0d9488;
-    --danger-color: #dc2626;
-    --warning-color: #d97706;
-    --dark-bg: #0f172a;
-    --light-bg: #e8ecf1;
+    --danger-color: #b42318;
+    --warning-color: #b45309;
+
+    --light-bg: #eef0f2;
     --card-bg: #ffffff;
-    --border-color: #94a3b8;
-    --text-dark: #1e293b;
-    --text-light: #475569;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --border-color: #cbd5df;
+    --border-strong: #a9b6c4;
+    --text-dark: #17222b;
+    --text-light: #5a6b7a;
+
+    /* Sombras tingidas no hue do fundo, nunca preto puro */
+    --shadow: 0 1px 2px rgba(23, 34, 43, 0.06), 0 1px 3px rgba(23, 34, 43, 0.10);
+    --shadow-lg: 0 12px 28px -8px rgba(23, 34, 43, 0.18), 0 4px 10px -4px rgba(23, 34, 43, 0.10);
+    --shadow-accent: 0 1px 2px rgba(15, 118, 110, 0.18);
+
     --radius: 12px;
-    --transition: 0.2s ease;
+    --radius-sm: 6px;
+    --radius-xs: 4px;
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Escala de z-index: substitui valores arbitrários soltos pelo projeto */
+    --z-base: 1;
+    --z-sticky: 100;
+    --z-dropdown: 200;
+    --z-modal: 1000;
+    --z-toast: 2000;
+
+    /* Números alinhados em coluna — obrigatório em tabela financeira */
+    --font-ui: 'Geist', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI Variable Text', 'Segoe UI', Roboto, sans-serif;
+    --font-num: 'Geist', ui-sans-serif, 'Segoe UI Variable Text', 'Segoe UI', sans-serif;
 
     /* Layout Variables */
     --card-padding: 16px;
@@ -27,145 +48,183 @@
     --card-radius: 12px;
     --card-shadow: var(--shadow);
     --card-border-width: 1px;
+    --content-max: 1360px;
 }
 
-/* Dark mode variables */
-body.dark-mode {
-    --light-bg: #0f172a;
-    --card-bg: #1e293b;
-    --border-color: #334155;
-    --text-dark: #f1f5f9;
-    --text-light: #94a3b8;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
 
 /* ==================== COLOR THEMES ==================== */
 
 body.theme-ocean {
-    --primary-color: #1e40af;
-    --secondary-color: #1e3a8a;
-    --success-color: #0891b2;
-    --danger-color: #dc2626;
-    --warning-color: #f59e0b;
-    --light-bg: #f0f9ff;
+    --primary-color: #2b4f7e;
+    --secondary-color: #23405f;
+    --success-color: #0e7490;
+    --danger-color: #b42318;
+    --warning-color: #b45309;
+    --light-bg: #eff4f8;
     --card-bg: #ffffff;
-    --border-color: #bfdbfe;
-    --text-dark: #0c2d6b;
-    --text-light: #1e40af;
+    --border-color: #c6d5e3;
+    --text-dark: #16283c;
+    --text-light: #46607a;
 }
 body.theme-ocean.dark-mode {
-    --light-bg: #0c1e3a;
-    --card-bg: #1a3a52;
-    --border-color: #094a6d;
-    --text-dark: #e0f2fe;
-    --text-light: #7dd3fc;
+    /* Cores semanticas clareadas para o fundo escuro */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --light-bg: #0e1a24;
+    --card-bg: #17242f;
+    --border-color: #2a4152;
+    --text-dark: #e4eef6;
+    --text-light: #8aa4b8;
 }
 
 body.theme-forest {
-    --primary-color: #15803d;
-    --secondary-color: #166534;
-    --success-color: #059669;
-    --danger-color: #dc2626;
-    --warning-color: #d97706;
-    --light-bg: #f0fdf4;
+    --primary-color: #2f6b45;
+    --secondary-color: #27573a;
+    --success-color: #0f7a52;
+    --danger-color: #b42318;
+    --warning-color: #b45309;
+    --light-bg: #f1f6f1;
     --card-bg: #ffffff;
-    --border-color: #86efac;
-    --text-dark: #1b4332;
-    --text-light: #2d6a4f;
+    --border-color: #c2d4c3;
+    --text-dark: #1a3125;
+    --text-light: #4c6b57;
 }
 body.theme-forest.dark-mode {
-    --light-bg: #0b3d1a;
-    --card-bg: #1a4d2e;
-    --border-color: #2d6a4f;
-    --text-dark: #d1fae5;
-    --text-light: #6ee7b7;
+    /* Cores semanticas clareadas para o fundo escuro */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --light-bg: #101a14;
+    --card-bg: #18261d;
+    --border-color: #33493a;
+    --text-dark: #e6f0e8;
+    --text-light: #94b09d;
 }
 
 body.theme-sunset {
-    --primary-color: #ea580c;
-    --secondary-color: #dc2626;
-    --success-color: #fb923c;
-    --danger-color: #b91c1c;
-    --warning-color: #f59e0b;
-    --light-bg: #fff7ed;
+    --primary-color: #b4530f;
+    --secondary-color: #8f3d14;
+    --success-color: #b45309;
+    --danger-color: #a32020;
+    --warning-color: #c2620b;
+    --light-bg: #faf5f0;
     --card-bg: #ffffff;
-    --border-color: #fed7aa;
-    --text-dark: #7c2d12;
-    --text-light: #b45309;
+    --border-color: #e6d3bd;
+    --text-dark: #3d2415;
+    --text-light: #7c5c45;
 }
 body.theme-sunset.dark-mode {
-    --light-bg: #3d1f0d;
-    --card-bg: #5a2e1f;
-    --border-color: #92400e;
-    --text-dark: #fedd95;
-    --text-light: #fed7aa;
+    /* Cores semanticas clareadas para o fundo escuro */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --light-bg: #1e1712;
+    --card-bg: #2a2019;
+    --border-color: #4a382b;
+    --text-dark: #f4e9dd;
+    --text-light: #b9a18c;
 }
 
 body.theme-lavender {
-    --primary-color: #7c3aed;
-    --secondary-color: #6d28d9;
-    --success-color: #a855f7;
-    --danger-color: #dc2626;
-    --warning-color: #f59e0b;
-    --light-bg: #faf5ff;
+    --primary-color: #6f42b5;
+    --secondary-color: #573593;
+    --success-color: #6f42b5;
+    --danger-color: #b42318;
+    --warning-color: #b45309;
+    --light-bg: #f5f3f8;
     --card-bg: #ffffff;
-    --border-color: #e9d5ff;
-    --text-dark: #4c0519;
-    --text-light: #7c3aed;
+    --border-color: #d4cadf;
+    --text-dark: #2c2140;
+    --text-light: #645980;
 }
 body.theme-lavender.dark-mode {
-    --light-bg: #2d1b4e;
-    --card-bg: #3f2463;
-    --border-color: #6d28d9;
-    --text-dark: #e9d5ff;
-    --text-light: #c4b5fd;
+    /* Cores semanticas clareadas para o fundo escuro */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --light-bg: #171320;
+    --card-bg: #221d2e;
+    --border-color: #3d3450;
+    --text-dark: #eee9f6;
+    --text-light: #a89fc0;
 }
 
 body.theme-mint {
-    --primary-color: #0d9488;
-    --secondary-color: #0f766e;
-    --success-color: #14b8a6;
-    --danger-color: #dc2626;
-    --warning-color: #f59e0b;
-    --light-bg: #f0fdfa;
+    --primary-color: #0f766e;
+    --secondary-color: #115e59;
+    --success-color: #0d7f77;
+    --danger-color: #b42318;
+    --warning-color: #b45309;
+    --light-bg: #f0f5f4;
     --card-bg: #ffffff;
-    --border-color: #99f6e4;
-    --text-dark: #134e4a;
-    --text-light: #0f766e;
+    --border-color: #bad9d3;
+    --text-dark: #14312e;
+    --text-light: #4b706b;
 }
 body.theme-mint.dark-mode {
-    --light-bg: #0a3d3a;
-    --card-bg: #134e4a;
-    --border-color: #0f766e;
-    --text-dark: #ccfbf1;
-    --text-light: #99f6e4;
+    /* Cores semanticas clareadas para o fundo escuro */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --light-bg: #0e1a19;
+    --card-bg: #162524;
+    --border-color: #2b4643;
+    --text-dark: #e2f0ee;
+    --text-light: #8fb2ad;
 }
 
 body.theme-rose {
-    --primary-color: #be185d;
-    --secondary-color: #831843;
-    --success-color: #f43f5e;
-    --danger-color: #be123c;
-    --warning-color: #f59e0b;
-    --light-bg: #fff1f5;
+    --primary-color: #9d2a52;
+    --secondary-color: #7c2242;
+    --success-color: #9d2a52;
+    --danger-color: #a32040;
+    --warning-color: #b45309;
+    --light-bg: #faf2f4;
     --card-bg: #ffffff;
-    --border-color: #fbcfe8;
-    --text-dark: #500724;
-    --text-light: #be185d;
+    --border-color: #e4ccd5;
+    --text-dark: #3a1424;
+    --text-light: #7c5462;
 }
 body.theme-rose.dark-mode {
-    --light-bg: #500724;
-    --card-bg: #83153b;
-    --border-color: #be185d;
-    --text-dark: #fbcfe8;
-    --text-light: #f472b6;
+    /* Cores semanticas clareadas para o fundo escuro */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --light-bg: #1c1116;
+    --card-bg: #281a20;
+    --border-color: #4a2f39;
+    --text-dark: #f5e6ea;
+    --text-light: #b795a1;
+}
+
+/* Fallback de modo escuro. Fica depois dos temas para que cada bloco
+   	heme-X.dark-mode continue prevalecendo quando houver um tema ativo.
+   Sem isso, este bloco genérico sobrescreveria o card-bg do tema. */
+/* Dark mode variables */
+body.dark-mode:not([class*='theme-']) {
+    --light-bg: #12181d;
+    --card-bg: #1a2229;
+    --border-color: #2c3841;
+    --border-strong: #3d4b56;
+    --text-dark: #eef2f5;
+    --text-light: #93a3b1;
+    /* Cores semânticas clareadas. Os valores de light mode são escuros
+       demais sobre fundo escuro: #b42318 no #1a2229 dá 2.4:1, abaixo do
+       mínimo de 4.5:1. Vale para os 7 temas, que não sobrescrevem
+       estes três. */
+    --danger-color: #f97066;
+    --warning-color: #f5b544;
+    --success-color: #3fb8a4;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.24);
+    --shadow-lg: 0 12px 28px -8px rgba(0, 0, 0, 0.55), 0 4px 10px -4px rgba(0, 0, 0, 0.40);
+    --shadow-accent: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 /* ==================== DESIGN STYLES POR TEMA ==================== */
 
 /* OCEAN - Glass Morphism */
-body.theme-ocean .summary-card,
+body.theme-ocean .summary-section,
 body.theme-ocean .transactions-section,
 body.theme-ocean .search-section,
 body.theme-ocean .modal-content {
@@ -174,7 +233,7 @@ body.theme-ocean .modal-content {
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px rgba(30, 64, 175, 0.08);
 }
-body.theme-ocean.dark-mode .summary-card,
+body.theme-ocean.dark-mode .summary-section,
 body.theme-ocean.dark-mode .transactions-section,
 body.theme-ocean.dark-mode .search-section,
 body.theme-ocean.dark-mode .modal-content {
@@ -183,7 +242,7 @@ body.theme-ocean.dark-mode .modal-content {
 }
 
 /* FOREST - Neumorphism */
-body.theme-forest .summary-card,
+body.theme-forest .summary-section,
 body.theme-forest .transactions-section,
 body.theme-forest .search-section,
 body.theme-forest .modal-content {
@@ -191,18 +250,15 @@ body.theme-forest .modal-content {
     border-radius: 20px;
     box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.7), 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
-body.theme-forest.dark-mode .summary-card,
+body.theme-forest.dark-mode .summary-section,
 body.theme-forest.dark-mode .transactions-section,
 body.theme-forest.dark-mode .search-section,
 body.theme-forest.dark-mode .modal-content {
     box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.05), 5px 5px 15px rgba(0, 0, 0, 0.5);
 }
-body.theme-forest .summary-card:hover {
-    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.7), inset 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
 
 /* SUNSET - Flat Design */
-body.theme-sunset .summary-card,
+body.theme-sunset .summary-section,
 body.theme-sunset .transactions-section,
 body.theme-sunset .search-section,
 body.theme-sunset .modal-content {
@@ -210,13 +266,9 @@ body.theme-sunset .modal-content {
     border-radius: 8px;
     box-shadow: none;
 }
-body.theme-sunset .summary-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--primary-color);
-}
 
 /* LAVENDER - Soft Shadows */
-body.theme-lavender .summary-card,
+body.theme-lavender .summary-section,
 body.theme-lavender .transactions-section,
 body.theme-lavender .search-section,
 body.theme-lavender .modal-content {
@@ -224,47 +276,53 @@ body.theme-lavender .modal-content {
     border-radius: 18px;
     box-shadow: 0 5px 20px rgba(124, 58, 237, 0.08);
 }
-body.theme-lavender .summary-card:hover {
-    box-shadow: 0 15px 40px rgba(124, 58, 237, 0.12);
-    transform: translateY(-2px);
-}
 
 /* MINT - Gradient Modern */
-body.theme-mint .summary-card,
+body.theme-mint .summary-section,
 body.theme-mint .transactions-section,
 body.theme-mint .search-section,
 body.theme-mint .modal-content {
-    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(13, 148, 136, 0.04) 100%);
+    /* O gradiente fica só na faixa do resumo. Como summary-section usa
+       overflow:hidden e tem filho com border-right, o gradiente em 135°
+       cortaria o divisor diagonalmente. */
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(13, 148, 136, 0.08);
 }
+body.theme-mint .summary-section {
+    background: linear-gradient(180deg, rgba(13, 148, 136, 0.05) 0%, transparent 60%);
+}
 
 /* ROSE - Luxury */
-body.theme-rose .summary-card,
+body.theme-rose .summary-section,
 body.theme-rose .transactions-section,
 body.theme-rose .search-section,
 body.theme-rose .modal-content {
     border: 2px solid transparent;
-    border-image: linear-gradient(135deg, #be185d, #f472b6) 1;
-    box-shadow: 0 0 25px rgba(190, 24, 93, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-image: linear-gradient(135deg, #9d2a52, #d9739a) 1;
+    box-shadow: 0 0 25px rgba(157, 42, 82, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-body.theme-rose .summary-card:hover {
-    box-shadow: 0 0 40px rgba(190, 24, 93, 0.2);
-    transform: scale(1.02);
+/* border-image não acompanha border-radius e zera a cor da borda nos
+   cantos; o resumo recebe a mesma moldura por outline, que respeita o
+   raio e deixa o divisor interno legível. */
+body.theme-rose .summary-section {
+    border-image: none;
+    border-color: transparent;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, #9d2a52, #d9739a) border-box;
 }
 
 /* ==================== LAYOUT STYLES ==================== */
 
-body.layout-modern .summary-card,
+body.layout-modern .summary-section,
 body.layout-modern .transactions-section,
 body.layout-modern .modal-content {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     border-radius: 16px;
-}
-body.layout-modern .summary-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
 }
 
 body.layout-compact {
@@ -272,22 +330,21 @@ body.layout-compact {
     --card-gap: 6px;
     --card-radius: 6px;
 }
-body.layout-compact .summary-card { padding: 10px; gap: 8px; }
-body.layout-compact .summary-card h3 { font-size: 0.7em; }
-body.layout-compact .summary-content p { font-size: 1.1em; }
+body.layout-compact .summary-primary { padding: 12px 16px; }
+body.layout-compact .summary-primary-value { font-size: 1.5rem; }
+body.layout-compact .summary-metric { padding: 6px 16px; }
+body.layout-compact .summary-metric-label { font-size: 0.7em; }
+body.layout-compact .summary-metric-value { font-size: 0.95em; }
+body.layout-compact .summary-equation { margin-top: 4px; font-size: 0.7em; }
 body.layout-compact .transactions-section { padding: 10px; }
 body.layout-compact .transactions-table th,
 body.layout-compact .transactions-table td { padding: 6px 8px; font-size: 0.8em; }
 
-body.layout-minimalist .summary-card,
+body.layout-minimalist .summary-section,
 body.layout-minimalist .transactions-section,
 body.layout-minimalist .modal-content {
     box-shadow: none;
     border: 2px solid var(--border-color);
-}
-body.layout-minimalist .summary-card:hover {
-    transform: none;
-    border-color: var(--primary-color);
 }
 
 body.layout-relaxed {
@@ -295,7 +352,12 @@ body.layout-relaxed {
     --card-gap: 16px;
     --card-radius: 20px;
 }
-body.layout-relaxed .summary-card { padding: 20px; gap: 16px; border-radius: 18px; }
+body.layout-relaxed .summary-section { border-radius: 20px; }
+body.layout-relaxed .summary-primary { padding: 26px 28px; }
+body.layout-relaxed .summary-primary-value { font-size: clamp(2rem, 3.8vw, 2.8rem); }
+body.layout-relaxed .summary-metric { padding: 16px 28px; }
+body.layout-relaxed .summary-metric-label { font-size: 0.78em; }
+body.layout-relaxed .summary-metric-value { font-size: 1.2em; }
 body.layout-relaxed .transactions-section { padding: 24px; border-radius: 20px; }
 body.layout-relaxed .transactions-table th,
 body.layout-relaxed .transactions-table td { padding: 14px 12px; font-size: 0.95em; }
@@ -303,21 +365,60 @@ body.layout-relaxed .transactions-table td { padding: 14px 12px; font-size: 0.95
 /* ==================== BASE STYLES ==================== */
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-family: var(--font-ui);
+    font-feature-settings: 'cv11', 'ss01';
+    font-variant-ligatures: contextual;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--light-bg);
     color: var(--text-dark);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Números: fonte tabular em todo valor monetário, para as colunas
+   alinharem na vírgula decimal. */
+.value-positive,
+.value-negative,
+.summary-primary-value,
+.summary-metric-value,
+.summary-equation,
+.transaction-count,
+.period-year,
+.filter-input-small,
+.type-badge {
+    font-family: var(--font-num);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+}
+
+.value-positive,
+.value-negative {
+    letter-spacing: -0.01em;
+}
+
+/* Foco visível para navegação por teclado — requisito de acessibilidade */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+}
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Substitui os style="display:none" espalhados no HTML.
+   Sem !important de propósito: o JS ainda controla .style.display
+   inline em alguns elementos e precisa continuar prevalecendo. */
+.is-hidden {
+    display: none;
 }
 
 /* ==================== APP CONTAINER ==================== */
 
 .app-container {
-    max-width: 1080px;
+    max-width: var(--content-max);
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 24px;
 }
 
 /* ==================== HEADER ==================== */
@@ -329,7 +430,7 @@ body {
     margin-bottom: 20px;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: var(--z-sticky);
     box-shadow: var(--shadow);
     transition: all var(--transition);
 }
@@ -525,7 +626,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
-    z-index: 1000;
+    z-index: var(--z-dropdown);
     padding: 12px;
     min-width: 260px;
 }
@@ -678,7 +779,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
-    z-index: 200;
+    z-index: var(--z-dropdown);
     padding: 6px;
     animation: dropdownIn 0.15s ease;
 }
@@ -1041,7 +1142,7 @@ body {
     border-radius: var(--radius);
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
     min-width: 200px;
-    z-index: 1000;
+    z-index: var(--z-dropdown);
     padding: 8px;
     animation: dropdownIn 0.15s ease;
 }
@@ -1081,72 +1182,170 @@ body {
 
 .hidden-column { display: none !important; }
 
-/* ==================== SUMMARY CARDS ==================== */
+/* ==================== RESUMO FINANCEIRO ==================== */
 
+/* Uma faixa só, em vez de quatro cards iguais. O saldo total ocupa a
+   metade esquerda e carrega a hierarquia; a direita traz os três
+   componentes separados por divisor, sem caixas soltas. */
 .summary-section {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.summary-card {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     background: var(--card-bg);
-    padding: var(--card-padding);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.25s ease;
-    border: 1px solid var(--border-color);
-    position: relative;
+    margin-bottom: 16px;
     overflow: hidden;
 }
 
-.summary-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    border-radius: 4px 0 0 4px;
+.summary-primary {
+    padding: 18px 22px;
+    border-right: 1px solid var(--border-color);
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--primary-color) 6%, transparent) 0%,
+        transparent 100%
+    );
 }
 
-.summary-card.anterior::before { background: var(--text-light); }
-.summary-card.receita::before { background: var(--success-color); }
-.summary-card.despesa::before { background: var(--danger-color); }
-.summary-card.saldo::before { background: var(--primary-color); }
-
-.summary-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.summary-icon {
-    font-size: 1.8em;
-    min-width: 40px;
-    text-align: center;
-}
-
-.summary-content h3 {
+.summary-primary-label {
     font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--text-light);
     margin-bottom: 2px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
 }
 
-.summary-content p {
-    font-size: 1.35em;
-    font-weight: 700;
+.summary-primary-value {
+    font-family: var(--font-num);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+    font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
     color: var(--text-dark);
 }
 
-.summary-card.receita .summary-content p { color: var(--success-color); }
-.summary-card.despesa .summary-content p { color: var(--danger-color); }
+/* O saldo só fica colorido quando negativo. Positivo em verde competiria
+   com a métrica de receitas e sinalizaria "estado bom" onde há apenas
+   um número. */
+.summary-primary-value.is-neg { color: var(--danger-color); }
+
+.summary-equation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 3px 6px;
+    margin-top: 7px;
+    font-size: 0.75em;
+    color: var(--text-light);
+}
+
+.summary-equation .eq-term {
+    font-family: var(--font-num);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+    font-weight: 500;
+}
+
+.summary-equation .eq-term:not(.is-pos):not(.is-neg) { color: var(--text-light); }
+.summary-equation .eq-term.is-pos { color: var(--success-color); }
+.summary-equation .eq-term.is-neg { color: var(--danger-color); }
+
+/* Os operadores + e − da conta. --border-strong é decorative demais
+   para texto: contraste de 2.3:1 contra o card. Usa --text-light. */
+.summary-equation .eq-op {
+    font-weight: 600;
+    color: var(--text-light);
+    padding: 0 1px;
+}
+
+.summary-metrics {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.summary-metric {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+    padding: 10px 20px;
+    position: relative;
+}
+
+/* Divisores desenhados com pseudo-elemento: uma borda real entraria em
+   conflito com o padding do item nas larguras estreitas. */
+.summary-metric + .summary-metric::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.summary-metric-label {
+    font-size: 0.74em;
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0.01em;
+}
+
+.summary-metric-value {
+    font-family: var(--font-num);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+    font-size: 1.06em;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    color: var(--text-dark);
+}
+
+.summary-metric.is-pos .summary-metric-value { color: var(--success-color); }
+.summary-metric.is-neg .summary-metric-value { color: var(--danger-color); }
+
+@media (max-width: 860px) {
+    /* Empilha: o saldo ocupa a largura toda e as três métricas ficam
+       numa linha horizontal sob ele, mantendo a faixa única. */
+    .summary-section { grid-template-columns: 1fr; }
+    .summary-primary {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .summary-metrics {
+        grid-template-rows: none;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    /* Divisores agora são verticais, entre colunas */
+    .summary-metric + .summary-metric::before {
+        left: 0;
+        right: auto;
+        top: 14px;
+        bottom: 14px;
+        width: 1px;
+        height: auto;
+    }
+}
+
+@media (max-width: 560px) {
+    /* Nesse tamanho as três métricas não cabem lado a lado legíveis:
+       viram uma coluna com divisores horizontais. */
+    .summary-metrics { grid-template-columns: 1fr; }
+    .summary-metric + .summary-metric::before {
+        left: 16px;
+        right: 16px;
+        top: 0;
+        bottom: auto;
+        width: auto;
+        height: 1px;
+    }
+    .summary-primary { padding: 16px; }
+    .summary-metric { padding: 10px 16px; }
+}
 
 /* ==================== TRANSACTIONS TABLE ==================== */
 
@@ -1177,9 +1376,10 @@ body {
     font-size: 0.8em;
     color: var(--text-light);
     background: var(--light-bg);
-    padding: 3px 10px;
-    border-radius: 20px;
+    padding: 3px 9px;
+    border-radius: var(--radius-xs);
     font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .table-container {
@@ -1202,9 +1402,9 @@ body {
     text-align: left;
     font-weight: 600;
     color: var(--text-light);
-    font-size: 0.75em;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.78em;
+    letter-spacing: 0.02em;
+    text-transform: none;
 }
 
 .transactions-table td {
@@ -1300,13 +1500,19 @@ body {
     color: white;
 }
 
+.btn-edit:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
 .btn-danger {
     background: transparent;
     color: var(--danger-color);
     padding: 6px 10px;
     font-size: 0.82em;
-    border: 1px solid var(--danger-color);
-    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all var(--transition);
     font-weight: 500;
@@ -1315,6 +1521,7 @@ body {
 .btn-danger:hover {
     background: var(--danger-color);
     color: white;
+    border-color: var(--danger-color);
 }
 
 .btn-toggle-pay {
@@ -1340,6 +1547,13 @@ body {
     border-color: var(--success-color);
 }
 
+/* Feedback de pressão em todos os botões de ação da linha */
+.btn-edit:active,
+.btn-danger:active,
+.btn-toggle-pay:active {
+    transform: scale(0.96);
+}
+
 .transactions-table tbody tr.paid-expense { opacity: 0.55; }
 .transactions-table tbody tr.paid-expense td { text-decoration: line-through; color: var(--text-light); }
 .transactions-table tbody tr.pending-expense {
@@ -1352,7 +1566,7 @@ body {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: var(--z-modal);
     left: 0;
     top: 0;
     width: 100%;
@@ -1388,7 +1602,8 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
-.modal-header h2 {
+.modal-header h2,
+.modal-header h3 {
     margin: 0;
     color: var(--text-dark);
     font-size: 1.15em;
@@ -1548,13 +1763,6 @@ body {
 
     .btn-label { display: none; }
 
-    .summary-section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-
-    .summary-icon { font-size: 1.5em; min-width: 32px; }
-    .summary-content p { font-size: 1.15em; }
 
     .transactions-section { padding: 12px; }
 
@@ -1574,11 +1782,10 @@ body {
     .header-brand h1 { font-size: 1.05em; }
     .subtitle { display: none; }
 
-    .summary-section { grid-template-columns: 1fr 1fr; gap: 6px; }
-    .summary-card { padding: 10px; gap: 8px; }
-    .summary-icon { font-size: 1.3em; }
-    .summary-content h3 { font-size: 0.65em; }
-    .summary-content p { font-size: 1em; }
+    .summary-primary { padding: 14px 16px; }
+    .summary-primary-value { font-size: 1.55rem; }
+    .summary-metric { padding: 8px 16px; }
+    .summary-metric-value { font-size: 0.95em; }
 
     .transactions-table th,
     .transactions-table td { padding: 6px; font-size: 0.78em; }
@@ -1594,7 +1801,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2000;
+    z-index: var(--z-toast);
     pointer-events: none;
 }
 
@@ -1877,4 +2084,149 @@ body {
     .logout-text {
         display: none;
     }
+}
+
+/* ======================================================================
+   ESTADOS DE SISTEMA
+   Toast substitui window.alert(); skeleton substitui o "carregando..."
+   textual; empty state composto no lugar da frase solta.
+   ====================================================================== */
+
+#toast-region {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: min(380px, calc(100vw - 40px));
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--text-light);
+    box-shadow: var(--shadow-lg);
+    color: var(--text-dark);
+    font-size: 0.9em;
+    line-height: 1.45;
+    pointer-events: auto;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.24s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.24s ease;
+}
+
+.toast.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success { border-left-color: var(--success-color); }
+.toast-error   { border-left-color: var(--danger-color); }
+.toast-warning { border-left-color: var(--warning-color); }
+.toast-info    { border-left-color: var(--primary-color); }
+
+.toast-icon { flex-shrink: 0; line-height: 1.4; }
+.toast-msg  { flex: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+    .toast { transition: none; transform: none; opacity: 1; }
+}
+
+/* ---------- Skeleton de carregamento ---------- */
+
+.skeleton-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.skeleton-bar {
+    height: 11px;
+    border-radius: var(--radius-xs);
+    background: linear-gradient(
+        90deg,
+        var(--light-bg) 0%,
+        var(--card-bg) 50%,
+        var(--light-bg) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-sweep 1.4s ease-in-out infinite;
+}
+
+.skeleton-bar.is-date { width: 64px; }
+.skeleton-bar.is-ref  { width: 48px; }
+.skeleton-bar.is-desc { flex: 1; }
+.skeleton-bar.is-valor{ width: 84px; }
+.skeleton-bar.is-tipo { width: 62px; }
+.skeleton-bar.is-acao { width: 132px; }
+
+@keyframes skeleton-sweep {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-bar { animation: none; }
+}
+
+/* ---------- Empty state composto ---------- */
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    padding: 56px 24px;
+    border-radius: var(--radius-sm);
+    background: var(--light-bg);
+    border: 1px dashed var(--border-strong);
+}
+
+.empty-state-mark {
+    font-size: 2.2em;
+    line-height: 1;
+    margin-bottom: 4px;
+    filter: saturate(0.7);
+    opacity: 0.75;
+}
+
+.empty-state h3 {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+}
+
+.empty-state p {
+    font-size: 0.88em;
+    color: var(--text-light);
+    max-width: 46ch;
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.empty-state-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.empty-state-hint {
+    font-size: 0.78em;
+    color: var(--text-light);
+    margin-top: 10px;
+    opacity: 0.85;
 }

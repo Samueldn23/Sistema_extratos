@@ -102,7 +102,12 @@ function obterUsuarioAtual() {
  */
 function verificarAutenticacaoAntes(operacao = 'esta ação') {
     if (!estaoAutenticado()) {
-        alert(`Você precisa estar logado para ${operacao}.\n\nClique no botão 'Login' no canto superior direito.`);
+        const mensagem = `Você precisa estar logado para ${operacao}. Use o botão Login no topo da tela.`;
+        if (typeof toast === 'function') {
+            toast(mensagem, 'warning');
+        } else {
+            console.warn(mensagem);
+        }
         return false;
     }
     return true;
@@ -126,19 +131,19 @@ function mostrarBotaoLogin(container) {
         btnLogin.className = 'btn-auth-toggle';
         btnLogin.type = 'button';
         btnLogin.title = 'Fazer login';
-        btnLogin.style.zIndex = '1000';
         btnLogin.innerHTML = `<span>🔐</span> <span class="auth-text">Login</span>`;
 
         // Handler direto
         const clickHandler = (e) => {
-            console.log('🖱️ CLIQUE DETECTADO NO BOTÃO DE LOGIN');
             e.preventDefault();
             e.stopPropagation();
             mostrarTelaLoginModal();
         };
 
-        btnLogin.onclick = clickHandler;
-        btnLogin.addEventListener('click', clickHandler, true);
+        // Registro único. Antes havia `onclick` e também um listener na
+        // fase de captura, o que renderizava o modal duas vezes por clique
+        // e recriava seu HTML.
+        btnLogin.addEventListener('click', clickHandler);
 
         container.appendChild(btnLogin);
     } catch (error) {
@@ -148,7 +153,6 @@ function mostrarBotaoLogin(container) {
 
 function mostrarTelaLoginModal() {
     try {
-        console.log('✓ mostrarTelaLoginModal: abrindo modal...');
         const container = document.getElementById('auth-container');
         if (!container) {
             console.error('❌ mostrarTelaLoginModal: auth-container não encontrado');
@@ -160,8 +164,8 @@ function mostrarTelaLoginModal() {
             <div class="auth-card">
                 <button class="auth-close" id="auth-close" title="Fechar">✕</button>
                 <div class="auth-header">
-                    <h1>💰 Extratos</h1>
-                    <p>Sistema de Controle Financeiro</p>
+                    <h2>💰 Extratos</h2>
+                    <p>Sistema de controle financeiro</p>
                 </div>
 
                 <!-- Aba de Login -->
@@ -211,7 +215,6 @@ function mostrarTelaLoginModal() {
 
     if (btnClose) {
         btnClose.addEventListener('click', (e) => {
-            console.log('🖱️ CLIQUE NO BOTÃO X');
             e.preventDefault();
             e.stopPropagation();
             fecharModalLogin();
@@ -222,13 +225,11 @@ function mostrarTelaLoginModal() {
         overlay.addEventListener('click', (e) => {
             // Fechar ao clicar no fundo
             if (e.target === overlay) {
-                console.log('🖱️ CLIQUE NO FUNDO');
                 fecharModalLogin();
             }
         });
     }
 
-    console.log('✓ Modal de login criado com sucesso');
     } catch (error) {
         console.error('❌ Erro em mostrarTelaLoginModal:', error);
     }
@@ -238,7 +239,6 @@ function fecharModalLogin() {
     try {
         const container = document.getElementById('auth-container');
         if (container) {
-            console.log('✓ Fechando modal de login');
             const overlay = container.querySelector('.auth-overlay');
             if (overlay) {
                 overlay.style.display = 'none';

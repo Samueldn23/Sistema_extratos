@@ -142,12 +142,16 @@ window.apiPatch = apiPatch;
 // ==================== Transaction Operations ====================
 
 // Carregar todas as transações
+let lastLoadError = null;
+
 async function loadAllTransactions() {
     try {
         const data = await apiGet('/transactions');
+        lastLoadError = null;
         return data.data || data.transactions || [];
     } catch (error) {
         console.error('Erro ao carregar transações:', error);
+        lastLoadError = error;
         return [];
     }
 }
@@ -235,7 +239,6 @@ async function importJsonDataToDB() {
                 if (!Array.isArray(data)) {
                     data = [];
                 }
-                console.log(`✓ Carregado de dados.json: ${data.length} registros`);
             } else {
                 throw new Error(`Status HTTP ${response.status}`);
             }
@@ -252,7 +255,6 @@ async function importJsonDataToDB() {
                 const result = await apiPost('/import-json', { transactions: data });
                 count = result.importados || 0;
                 noDataMsg.textContent = `✓ ${count} transações importadas com sucesso!`;
-                console.log(`✓ Importação concluída: ${count} importadas, ${result.erros || 0} erros`);
                 await loadAllTransactions();
             } catch (importError) {
                 console.error('Erro ao importar transações:', importError);
@@ -388,6 +390,67 @@ function showNotification(message, type = 'info', duration = 2000) {
     }
 }
 
+// ==================== Toast ====================
+
+const TOAST_ICONS = {
+    success: '✓',
+    error: '✕',
+    warning: '!',
+    info: 'i'
+};
+
+/**
+ * Notificação não bloqueante. Substitui window.alert(), que interrompe a
+ * fluxo e não respeita o tema nem o layout.
+ */
+function toast(message, type = 'info', duration = 4000) {
+    const region = document.getElementById('toast-region');
+    if (!region) {
+        console.warn('[toast] região ausente:', message);
+        return;
+    }
+
+    const el = document.createElement('div');
+    el.className = `toast toast-${type}`;
+    el.setAttribute('role', type === 'error' ? 'alert' : 'status');
+
+    const icon = document.createElement('span');
+    icon.className = 'toast-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = TOAST_ICONS[type] || TOAST_ICONS.info;
+
+    const msg = document.createElement('span');
+    msg.className = 'toast-msg';
+    msg.textContent = message;
+
+    el.appendChild(icon);
+    el.appendChild(msg);
+    region.appendChild(el);
+
+    requestAnimationFrame(() => el.classList.add('is-visible'));
+
+    const remove = () => {
+        el.classList.remove('is-visible');
+        setTimeout(() => el.remove(), 260);
+    };
+
+    const timer = setTimeout(remove, duration);
+    el.addEventListener('click', () => {
+        clearTimeout(timer);
+        remove();
+    });
+
+    return el;
+}
+
+/**
+ * Substitui window.alert() nos fluxos de escrita. Mantém a assinatura
+ * (mensagem, tipo) para que as chamadas existentes migrem em bloco.
+ */
+function notificar(message, type = 'info') {
+    toast(message, type);
+}
+
 /**
  * Cria uma linha da tabela com os dados da transação
  */
@@ -401,11 +464,6 @@ function createTransactionRow(transaction, monthIndex, year) {
     const datePart = transaction.DATA.split('T')[0]; // "2025-07-31"
     const [transYear, transMonth, transDay] = datePart.split('-').map(Number);
     const formattedDate = formatDateDisplay(transaction.DATA);
-
-    // Log para debug
-    if (!isPositive) {
-        console.log(`[ROW] ${transaction.id}: pago=${transaction.pago} (tipo: ${typeof transaction.pago}) → isPago=${isPago} → Botão: ${isPago ? '✓ Pago' : '○ Pagar'}`);
-    }
 
     // Adicionar classe se for despesa paga
     if (!isPositive && isPago) {
@@ -528,14 +586,26 @@ async function clearAllDatabase() {
 // Carregar dados do JSON
 async function loadTransactions() {
     try {
-        showNotification('⏳ Carregando transações...', 'info', 0);
+        renderSkeleton();
 
         allTransactions = await loadAllTransactions();
 
+        // Falha de rede/API precisa aparecer como erro, não como "sem dados"
+        if (lastLoadError) {
+            updatePeriodDisplay();
+            displayTransactions();
+            notificar(
+                lastLoadError.message.includes('401')
+                    ? 'Sua sessão expirou. Faça login novamente.'
+                    : 'Não foi possível falar com o servidor. Verifique se a aplicação está rodando.',
+                'error'
+            );
+            return;
+        }
+
         if (allTransactions.length === 0) {
-            showNotification('⏳ Nenhuma transação encontrada. Tentando importar dados...', 'info', 0);
+            // Banco vazio: tenta semear a partir do dados.json estático
             try {
-                // Importação automática: busca dados.json sem autenticação
                 const response = await fetch('dados.json');
                 if (response.ok) {
                     const data = await response.json();
@@ -548,27 +618,23 @@ async function loadTransactions() {
                         });
                         if (importRes.ok) {
                             const result = await importRes.json();
-                            console.log(`✓ Importação automática: ${result.importados} transações`);
+                            allTransactions = await loadAllTransactions();
+                            if (result.importados > 0) {
+                                notificar(`${result.importados} transações importadas do dados.json.`, 'info');
+                            }
                         }
                     }
                 }
-                allTransactions = await loadAllTransactions();
             } catch (error) {
                 console.warn('Erro ao importar dados automaticamente:', error);
             }
-        }
-
-        if (allTransactions.length === 0) {
-            showNotification('✓ Sistema pronto (sem dados). Clique em ⬆️ ou 📁 para importar.', 'info', 3000);
-        } else {
-            showNotification(`✓ ${allTransactions.length} transações carregadas!`, 'success', 2000);
         }
 
         updatePeriodDisplay();
         displayTransactions();
     } catch (error) {
         console.error('Erro ao carregar transações:', error);
-        showNotification('❌ Erro ao conectar ao servidor local. Verifique se a aplicação foi iniciada pelos scripts de desenvolvimento.', 'error', 0);
+        notificar('Erro inesperado ao carregar as transações.', 'error');
     }
 }
 
@@ -882,10 +948,7 @@ function renderTransactionsTable(filtered, monthIndex, year, filteredForSummary,
 
     if (filtered.length === 0) {
         tbody.parentElement.style.display = 'none';
-        noDataMsg.style.display = 'block';
-        noDataMsg.textContent = isSearch
-            ? 'Nenhuma transação encontrada com esse critério.'
-            : 'Nenhuma transação encontrada para este período.';
+        renderEmptyState(isSearch);
         updateSummary([]);
         updateTransactionCount(0);
         return;
@@ -893,6 +956,7 @@ function renderTransactionsTable(filtered, monthIndex, year, filteredForSummary,
 
     tbody.parentElement.style.display = 'table';
     noDataMsg.style.display = 'none';
+    noDataMsg.innerHTML = '';
 
     // Popular tabela
     filtered.forEach(transaction => {
@@ -907,31 +971,111 @@ function renderTransactionsTable(filtered, monthIndex, year, filteredForSummary,
     applyColumnVisibility();
 }
 
+/**
+ * Skeleton que acompanha a forma real da tabela enquanto os dados carregam.
+ */
+function renderSkeleton(rows = 8) {
+    const tbody = document.getElementById('transactions-body');
+    const noDataMsg = document.getElementById('no-data-message');
+    if (!tbody) return;
+
+    const container = tbody.parentElement;
+    container.style.display = 'table';
+    noDataMsg.style.display = 'none';
+    noDataMsg.innerHTML = '';
+    tbody.innerHTML = '';
+
+    const cells = [
+        'is-date', 'is-ref', 'is-desc', 'is-valor', 'is-tipo', 'is-acao'
+    ];
+
+    for (let i = 0; i < rows; i++) {
+        const tr = document.createElement('tr');
+        tr.setAttribute('aria-hidden', 'true');
+        cells.forEach(cls => {
+            const td = document.createElement('td');
+            const bar = document.createElement('div');
+            bar.className = `skeleton-bar ${cls}`;
+            td.appendChild(bar);
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    }
+}
+
+/**
+ * Empty state composto, no lugar da frase solta. O texto muda conforme a
+ * causa: busca sem resultado, período sem Movimentação, ou app sem dados.
+ */
+function renderEmptyState(isSearch = false) {
+    const noDataMsg = document.getElementById('no-data-message');
+    if (!noDataMsg) return;
+
+    const bankIsEmpty = allTransactions.length === 0;
+
+    let mark, title, text, actions = '';
+
+    if (isSearch) {
+        mark = '🔍';
+        title = 'Nada encontrado';
+        text = 'Nenhuma transação corresponde ao seu termo de busca. Tente outra palavra ou limpe a pesquisa.';
+    } else if (bankIsEmpty) {
+        mark = '🗒️';
+        title = 'Nenhuma transação ainda';
+        text = 'Comece adicionando uma movimentação manualmente ou importando um arquivo JSON com o seu extrato.';
+        actions = estaoAutenticado()
+            ? '<div class="empty-state-actions">' +
+                '<button class="toolbar-btn btn-primary-action" data-empty-action="add"><span>➕</span> <span class="btn-label">Nova transação</span></button>' +
+                '<button class="toolbar-btn" data-empty-action="import"><span>⬆️</span> <span class="btn-label">Importar JSON</span></button>' +
+              '</div>'
+            : '<p class="empty-state-hint">Entre com sua conta para adicionar transações.</p>';
+    } else {
+        const { monthIndex, year } = { monthIndex: currentDate.getMonth(), year: currentDate.getFullYear() };
+        mark = '📭';
+        title = `Sem movimentações em ${months[monthIndex].toLowerCase()} de ${year}`;
+        text = 'Este mês não tem lançamentos. Use as setas para navegar entre os meses ou ajuste os filtros.';
+    }
+
+    noDataMsg.style.display = 'block';
+    noDataMsg.innerHTML = `
+        <div class="empty-state">
+            <div class="empty-state-mark" aria-hidden="true">${mark}</div>
+            <h3>${title}</h3>
+            <p>${text}</p>
+            ${actions}
+        </div>
+    `;
+
+    noDataMsg.querySelectorAll('[data-empty-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.dataset.emptyAction;
+            if (action === 'add') {
+                openAddTransactionModal();
+            } else if (action === 'import') {
+                document.getElementById('json-file-input').click();
+            }
+        });
+    });
+}
+
 // Alternar status de pagamento de despesa
 async function togglePaymentStatus(transaction) {
     try {
         // Enviar diretamente o novo status desejado (inverter o atual)
         const newStatus = !transaction.pago;
-        console.log(`[TOGGLE] ID: ${transaction.id}`);
-        console.log(`[TOGGLE] Pago atual: ${transaction.pago} (tipo: ${typeof transaction.pago})`);
-        console.log(`[TOGGLE] Novo status: ${newStatus} (tipo: ${typeof newStatus})`);
 
         const result = await updatePaymentStatus(transaction.id, newStatus);
-        console.log(`[TOGGLE] ✓ Servidor respondeu: ${JSON.stringify(result)}`);
 
         // Atualizar na memória
         const index = allTransactions.findIndex(t => t.id === transaction.id);
         if (index !== -1) {
             allTransactions[index].pago = result.pago;
-            console.log(`[TOGGLE] ✓ Memória atualizada: allTransactions[${index}].pago = ${allTransactions[index].pago}`);
         }
 
-        console.log(`[DISPLAY] Chamando displayTransactions()...`);
         displayTransactions();
-        console.log(`[DISPLAY] ✓ displayTransactions() concluído`);
     } catch (error) {
-        console.error('[ERROR]', error);
-        alert('❌ Erro ao atualizar status de pagamento');
+        console.error('Erro ao alternar status de pagamento:', error);
+        notificar('Não foi possível atualizar o status de pagamento.', 'error');
     }
 }
 
@@ -964,7 +1108,15 @@ function updateSummary(transactions) {
 
     const saldoElement = document.getElementById('total-saldo');
     saldoElement.textContent = formatValue(saldoTotal);
-    saldoElement.style.color = saldoTotal >= 0 ? '#0d9488' : '#dc2626';
+    // Só o negativo recebe cor: três números verdes (saldo + receitas)
+    // leriam como celebração, e o que interessa aqui é "estou no vermelho?"
+    saldoElement.classList.toggle('is-neg', saldoTotal < 0);
+
+    // Espelha os componentes na conta acima do saldo, deixando explícita a
+    // relação que antes ficava implícita em quatro cards soltos.
+    document.getElementById('eq-anterior').textContent = formatValue(saldoAnterior);
+    document.getElementById('eq-receitas').textContent = formatValue(totalReceitas);
+    document.getElementById('eq-despesas').textContent = formatValue(totalDespesas);
 }
 
 // Calcular saldo acumulado antes do período ativo
@@ -1004,10 +1156,10 @@ async function deleteTransaction(id) {
         await deleteTransactionApi(id);
         allTransactions = allTransactions.filter(t => t.id !== id);
         displayTransactions();
-        alert('✓ Transação removida!');
+        notificar('Transação removida.', 'success');
     } catch (error) {
         console.error('Erro ao deletar transação:', error);
-        alert('❌ Erro ao remover transação');
+        notificar('Não foi possível remover a transação.', 'error');
     }
 }
 
@@ -1079,19 +1231,19 @@ async function saveAddTransaction(event) {
 
         // Validação
         if (!date || !isValidDate(date)) {
-            alert('❌ Data inválida');
+            notificar('Data inválida.', 'error');
             return;
         }
         if (!description || description.trim().length === 0) {
-            alert('❌ Descrição não pode estar vazia');
+            notificar('A descrição não pode ficar vazia.', 'error');
             return;
         }
         if (description.trim().length > 255) {
-            alert('❌ Descrição muito longa (máx 255 caracteres)');
+            notificar('A descrição excede o limite de 255 caracteres.', 'error');
             return;
         }
         if (!valueStr || !isValidNumber(valueStr)) {
-            alert('❌ Valor inválido');
+            notificar('Valor inválido.', 'error');
             return;
         }
 
@@ -1118,7 +1270,7 @@ async function saveAddTransaction(event) {
         showNotification('✓ Transação adicionada com sucesso!', 'success', 2000);
     } catch (error) {
         console.error('Erro ao adicionar transação:', error);
-        alert(`❌ Erro ao adicionar transação: ${error.message}`);
+        notificar(`Não foi possível adicionar a transação: ${error.message}`, 'error');
     }
 }
 
@@ -1137,19 +1289,19 @@ async function saveEditTransaction(event) {
 
         // Validação
         if (!date || !isValidDate(date)) {
-            alert('❌ Data inválida');
+            notificar('Data inválida.', 'error');
             return;
         }
         if (!description || description.trim().length === 0) {
-            alert('❌ Descrição não pode estar vazia');
+            notificar('A descrição não pode ficar vazia.', 'error');
             return;
         }
         if (description.trim().length > 255) {
-            alert('❌ Descrição muito longa (máx 255 caracteres)');
+            notificar('A descrição excede o limite de 255 caracteres.', 'error');
             return;
         }
         if (!valueStr || !isValidNumber(valueStr)) {
-            alert('❌ Valor inválido');
+            notificar('Valor inválido.', 'error');
             return;
         }
 
@@ -1181,7 +1333,7 @@ async function saveEditTransaction(event) {
         showNotification('✓ Transação editada com sucesso!', 'success', 2000);
     } catch (error) {
         console.error('Erro ao editar transação:', error);
-        alert(`❌ Erro ao editar transação: ${error.message}`);
+        notificar(`Não foi possível editar a transação: ${error.message}`, 'error');
     }
 }
 
@@ -1212,7 +1364,6 @@ async function handleJsonFileUpload(file) {
         const count = result.importados || 0;
 
         showNotification(`✓ ${count} transações importadas com sucesso!`, 'success', 2000);
-        console.log(`✓ Importação concluída: ${count} importadas, ${result.erros || 0} erros`);
 
         if (result.errosList && result.errosList.length > 0) {
             console.warn('Erros na importação:', result.errosList);
@@ -1233,7 +1384,7 @@ async function handleJsonFileUpload(file) {
 function exportDatabaseFile() {
     try {
         if (allTransactions.length === 0) {
-            alert('⚠️ Nenhuma transação para exportar');
+            notificar('Não há transações para exportar.', 'warning');
             return;
         }
 
@@ -1248,7 +1399,7 @@ function exportDatabaseFile() {
         showNotification('✓ Dados exportados com sucesso!', 'success', 2000);
     } catch (error) {
         console.error('Erro ao exportar dados:', error);
-        alert(`❌ Erro ao exportar dados: ${error.message}`);
+        notificar(`Falha ao exportar: ${error.message}`, 'error');
     }
 }
 
@@ -1478,12 +1629,54 @@ function initTheme() {
         layoutSelector.value = savedLayout;
     }
 
-    // Carregar modo claro/escuro
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        updateThemeButton();
+    // Modo claro/escuro. Sem preferência salva, segue o sistema.
+    // Migra a chave antiga 'theme' para 'themeMode'.
+    const modeSelector = document.getElementById('mode-selector');
+    const legacyTheme = localStorage.getItem('theme');
+    const savedMode = localStorage.getItem('themeMode')
+        || (legacyTheme === 'dark' ? 'dark' : legacyTheme === 'light' ? 'light' : 'system');
+    if (modeSelector) {
+        modeSelector.value = savedMode;
     }
+    applyMode(savedMode);
+}
+
+const systemDarkQuery = typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-color-scheme: dark)')
+    : null;
+
+function resolveDark(mode) {
+    if (mode === 'dark') return true;
+    if (mode === 'light') return false;
+    return Boolean(systemDarkQuery && systemDarkQuery.matches);
+}
+
+/**
+ * Aplica o modo. 'system' delega a prefers-color-scheme e acompanha
+ * alterações do sistema enquanto a aba estiver aberta.
+ */
+function applyMode(mode) {
+    document.body.classList.toggle('dark-mode', resolveDark(mode));
+
+    if (mode === 'system' && systemDarkQuery) {
+        if (systemDarkQuery.__bound) return;
+        systemDarkQuery.__bound = true;
+        const onChange = () => {
+            if ((localStorage.getItem('themeMode') || 'system') === 'system') {
+                document.body.classList.toggle('dark-mode', systemDarkQuery.matches);
+            }
+        };
+        if (typeof systemDarkQuery.addEventListener === 'function') {
+            systemDarkQuery.addEventListener('change', onChange);
+        } else if (typeof systemDarkQuery.addListener === 'function') {
+            systemDarkQuery.addListener(onChange);
+        }
+    }
+}
+
+function setMode(mode) {
+    localStorage.setItem('themeMode', mode);
+    applyMode(mode);
 }
 
 function setColorTheme(themeName) {
@@ -1518,20 +1711,6 @@ function setLayoutStyle(layoutName) {
 
     // Salvar preferência
     localStorage.setItem('layoutStyle', layoutName);
-}
-
-function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateThemeButton();
-}
-
-function updateThemeButton() {
-    const btn = document.getElementById('btn-toggle-theme');
-    const isDark = document.body.classList.contains('dark-mode');
-    btn.textContent = isDark ? '☀️' : '🌙';
-    btn.title = isDark ? 'Alternar para tema claro' : 'Alternar para tema escuro';
 }
 
 // ==================== Atualizar Visibilidade de Ações (baseado em autenticação) ====================
@@ -1601,7 +1780,6 @@ function returnToCurrentMonth() {
 // ======================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('✓ DOMContentLoaded disparado');
 
     // ==================== Verificar Autenticação ====================
     // Permite visualizar mesmo sem autenticação
@@ -1829,7 +2007,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('btn-clear-database').addEventListener('click', clearAllDatabase);
-    document.getElementById('btn-toggle-theme').addEventListener('click', toggleTheme);
+    // Modo claro/escuro
+    const modeSelectorEl = document.getElementById('mode-selector');
+    if (modeSelectorEl) {
+        modeSelectorEl.addEventListener('change', (e) => setMode(e.target.value));
+    }
 
     // Toggle para mostrar/ocultar filtros
     document.getElementById('btn-toggle-filters').addEventListener('click', () => {
